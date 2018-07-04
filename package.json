@@ -11,7 +11,7 @@
   "homepage": "https://github.com/fiverr/page-timing#readme",
   "main": "dist/main.js",
   "scripts": {
-    "prepublish": "npm run build",
+    "prepublishOnly": "npm run build",
     "build": "webpack",
     "test": "NODE_ENV=test node --max_old_space_size=2048 ./node_modules/karma/bin/karma start .karma/index.js --loglevel debug",
     "lint": "eslint -c .eslintrc.js src/*.js src/**/*.js --quiet"
