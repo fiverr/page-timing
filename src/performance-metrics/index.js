@@ -1,6 +1,4 @@
-export const performanceMetrics = new Set();
-
-[
+export const performanceMetrics = [
     'connectEnd',
     'connectStart',
     'domComplete',
@@ -22,4 +20,4 @@ export const performanceMetrics = new Set();
     'secureConnectionStart',
     'unloadEventEnd',
     'unloadEventStart',
-].forEach(performanceMetrics.add, performanceMetrics);
+];

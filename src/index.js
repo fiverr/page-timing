@@ -14,12 +14,12 @@ const DEFAULT_ACCUMULATOR = [];
  */
 export const pageTiming = ({metrics = performanceMetrics, reducer = DEFAULT_REDUCER, accumulator = DEFAULT_ACCUMULATOR} = {}) =>
     supported() ?
-        Array.from(metrics)
+        metrics
             .reduce(
                 (results, metric, index, metrics) => {
 
                     // Ignore invalid performance metrics
-                    if (!performanceMetrics.has(metric)) {
+                    if (!performanceMetrics.includes(metric)) {
                         return results;
                     }
                     const value = measure(metric);
@@ -35,4 +35,4 @@ export const pageTiming = ({metrics = performanceMetrics, reducer = DEFAULT_REDU
             )
         :
         accumulator
-    ;
+;
