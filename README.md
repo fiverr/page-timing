@@ -61,13 +61,13 @@ const event = {
     timings: {},
     page: "homepage_loggedout"
 };
-const results = pageTiming({
+pageTiming({
     reducer,
     accumulator: event.timings,
     metrics,
 });
 
-sendPreformanceEvent(...results);
+sendPreformanceEvent(event);
 ```
 Output
 ```json
