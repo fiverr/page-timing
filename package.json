@@ -1,9 +1,14 @@
 {
   "name": "page-timing",
-  "version": "0.0.1-alpha",
+  "version": "1.0.0-rc",
   "description": "Measure browser timing and do something with it",
   "author": "Fiverr SRE",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fiverr/page-timing.git"
+  },
+  "homepage": "https://github.com/fiverr/page-timing#readme",
   "main": "dist/main.js",
   "scripts": {
     "prepublish": "npm run build",
