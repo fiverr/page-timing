@@ -6,12 +6,13 @@ describe('supported', () => {
     const performance = Object.getOwnPropertyDescriptor(window, 'performance');
 
     beforeEach(() => {
-        delete require.cache[require.resolve('.')];
         supported = require('.').supported;
     });
-    afterEach(() =>
-        Object.defineProperty(window, 'performance', performance)
-    );
+    afterEach(() => {
+        Object.defineProperty(window, 'performance', performance);
+        delete require.cache[require.resolve('.')];
+        supported = undefined;
+    });
 
     it('Should be supported', () =>
         expect(supported()).to.be.true

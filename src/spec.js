@@ -1,4 +1,5 @@
 import { pageTiming } from '.';
+
 const SLEEP_FOR = 400;
 
 describe('page-timing', async() => {

@@ -22,7 +22,7 @@ describe('memoise', () => {
         expect(memoise(key)).to.equal('Thing');
     });
 
-    it('Should not be able to memoise by primitive', () =>
+    it('Should throw error when trying to memoise primitives', () =>
         [
             '',
             Symbol(),

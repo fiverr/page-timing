@@ -1,0 +1,25 @@
+export const performanceMetrics = new Set();
+
+[
+    'connectEnd',
+    'connectStart',
+    'domComplete',
+    'domContentLoadedEventEnd',
+    'domContentLoadedEventStart',
+    'domInteractive',
+    'domLoading',
+    'domainLookupEnd',
+    'domainLookupStart',
+    'fetchStart',
+    'loadEventEnd',
+    'loadEventStart',
+    'navigationStart',
+    'redirectEnd',
+    'redirectStart',
+    'requestStart',
+    'responseEnd',
+    'responseStart',
+    'secureConnectionStart',
+    'unloadEventEnd',
+    'unloadEventStart',
+].forEach(performanceMetrics.add, performanceMetrics);
