@@ -74,7 +74,7 @@ Output
 {
   "group": "performance",
   "type": "browser_performance",
-  "metrics": {
+  "timings": {
     "domInteractive": 208.01,
     "loadEventEnd": 431.01
   },
