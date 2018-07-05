@@ -1,4 +1,5 @@
-# page-timing
+# page-timing [![](https://img.shields.io/npm/v/page-timing.svg)](https://www.npmjs.com/package/page-timing) [![](https://img.shields.io/badge/source--000000.svg?logo=github&style=social)](https://github.com/fiverr/page-timing) [![](https://circleci.com/gh/fiverr/page-timing.svg?style=svg)](https://circleci.com/gh/fiverr/page-timing)
+
 Measure browser page performance timing and reduce it to a results object using the [navigation timing API](https://www.w3.org/TR/navigation-timing/)
 
 This program collects each metrics' total time from `timeOrigin` (falls back to `navigationStart`), so metric calculations can be performed by the analyser, wherever the data is reported to.
