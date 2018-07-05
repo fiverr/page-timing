@@ -4,6 +4,21 @@ Measure browser page performance timing and reduce it to a results object using 
 
 This program collects each metrics' total time from `timeOrigin` (falls back to `navigationStart`), so metric calculations can be performed by the analyser, wherever the data is reported to.
 
+Empty metrics (whose value is 0) will be omitted from the results.
+
+## API
+The method accepts named arguments, all of which are optional
+
+```js
+pageTiming({metrics: [], reducer: () => {}, accumulator = []});
+```
+
+| Key | Role | Type | Default value
+| - | - | - | -
+| `metrics` | The metrics you'd like to collect | Array | All browser performance metrics
+| `reducer` | The reducer used to collect them | Function | `(a, [k, v]) => [...a, [k, v]]`
+| `accumulator` | Initial data structure to reduce on | Any | `[]`
+
 ## Usage
 
 ### Basic use
