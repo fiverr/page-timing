@@ -28,8 +28,11 @@ jobs:
       - restore_cache:
           key: dependency-cache-{{ checksum "package.json" }}
       - run:
-          name: Test code and lint
+          name: Run tests
           command: npm t
+      - run:
+          name: Code linting
+          command: npm run lint
   publish:
     <<: *defaults
     steps:

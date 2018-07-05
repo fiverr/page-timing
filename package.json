@@ -1,13 +1,18 @@
 {
   "name": "page-timing",
-  "version": "0.0.1-alpha",
+  "version": "1.0.0",
   "description": "Measure browser timing and do something with it",
   "author": "Fiverr SRE",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fiverr/page-timing.git"
+  },
+  "homepage": "https://github.com/fiverr/page-timing#readme",
   "main": "dist/main.js",
   "scripts": {
-    "prepublish": "npm run build",
-    "build": "webpack",
+    "prepublishOnly": "npm run build",
+    "build": "webpack --config .webpack.config.js",
     "test": "NODE_ENV=test node --max_old_space_size=2048 ./node_modules/karma/bin/karma start .karma/index.js --loglevel debug",
     "lint": "eslint -c .eslintrc.js src/*.js src/**/*.js --quiet"
   },
