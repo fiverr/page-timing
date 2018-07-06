@@ -1,4 +1,4 @@
-export const performanceMetrics = [
+const PERFORMANCE_METRICS = [
     'connectEnd',
     'connectStart',
     'domComplete',
@@ -21,3 +21,9 @@ export const performanceMetrics = [
     'unloadEventEnd',
     'unloadEventStart',
 ];
+
+export const performanceMetrics = (metrics) => Array.isArray(metrics) ?
+    metrics.filter((metric) => PERFORMANCE_METRICS.includes(metric))
+    :
+    PERFORMANCE_METRICS
+;

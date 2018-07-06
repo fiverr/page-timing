@@ -3,7 +3,6 @@ import { measure } from './measure';
 import { supported } from './supported';
 
 const DEFAULT_REDUCER = (accumulator, [key, value]) => [...accumulator, [key, value]];
-const DEFAULT_ACCUMULATOR = [];
 
 /**
  * An opinionated reducer on performance.timing object
@@ -12,24 +11,18 @@ const DEFAULT_ACCUMULATOR = [];
  * @param  {Any}      [options.accumulator] Reducer accumulator
  * @return {Any}
  */
-export const pageTiming = ({metrics = performanceMetrics, reducer = DEFAULT_REDUCER, accumulator = DEFAULT_ACCUMULATOR} = {}) =>
+export const pageTiming = ({metrics, reducer = DEFAULT_REDUCER, accumulator = []} = {}) =>
     supported() ?
-        metrics
+        performanceMetrics(metrics)
             .reduce(
                 (results, metric, index, metrics) => {
-
-                    // Ignore invalid performance metrics
-                    if (!performanceMetrics.includes(metric)) {
-                        return results;
-                    }
                     const value = measure(metric);
 
-                    // Ignore empty entries
-                    if (value <= 0) {
-                        return results;
-                    }
-
-                    return reducer(results, [metric, value], index, metrics);
+                    return value > 0 ?
+                        reducer(results, [metric, value], index, metrics)
+                        :
+                        results
+                    ;
                 },
                 accumulator
             )
