@@ -25,15 +25,6 @@ describe('page-timing', async() => {
         );
     });
 
-    it('Should ignore metrics that are not valid', async() => {
-        await onload();
-        await sleep(SLEEP_FOR);
-        const measurements = pageTiming({
-            metrics: ['domInteractive', 'loadEventEnd', 'another'],
-        });
-        expect(measurements).to.have.lengthOf(2);
-    });
-
     it('Should format metrics', async() => {
         await onload();
         await sleep(SLEEP_FOR);
