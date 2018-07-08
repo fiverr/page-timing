@@ -4,11 +4,12 @@ const IGNORE = [
 ];
 
 describe('performance-metrics', () => {
-    it('Default should include all performance metrics', () => {
+    it('Should return a list of all performance metrics by default', () => {
         const windowMetrics = Object.keys(window.performance.timing.constructor.prototype)
             .filter((item) => !IGNORE.includes(item));
 
         expect(performanceMetrics()).to.have.members(windowMetrics);
+        expect(performanceMetrics('not a list')).to.have.members(windowMetrics);
     });
 
     it('Should pass an empty array', () => {
@@ -16,6 +17,6 @@ describe('performance-metrics', () => {
     });
 
     it('Should ignore metrics that are not valid', () => {
-        expect(performanceMetrics(['domInteractive', 'loadEventEnd', 'another'])).to.have.lengthOf(2);
+        expect(performanceMetrics(['domInteractive', 'loadEventEnd', 'another'])).to.have.members(['domInteractive', 'loadEventEnd']);
     });
 });
