@@ -1,6 +1,6 @@
 {
   "name": "page-timing",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Measure browser timing and do something with it",
   "author": "Fiverr SRE",
   "license": "MIT",
