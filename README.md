@@ -44,7 +44,7 @@ Output
 ]
 ```
 
-### Key value pairs
+### StatsD messages format
 ```js
 const now = Date.now();
 const reducer = (accumulator, [key, value]) =>
