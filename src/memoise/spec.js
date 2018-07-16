@@ -12,19 +12,14 @@ describe('memoise', () => {
         global.WeakMap = weakMap;
     });
 
-    it('Should uses the getter to retrieve the value', () => {
-        memoise(key, () => 'Thang');
-        expect(memoise(key)).to.equal('Thang');
-    });
-
-    it('Should return the value', () =>
-        expect(memoise(key, () => 'Thang')).to.equal('Thang')
+    it('Should uses the getter to retrieve the value', () =>
+        expect(memoise({}, () => 'Thang')).to.equal('Thang')
     );
 
     it('Should memoise the result', () => {
         memoise(key, () => 'Thing');
-        memoise(key, () => 'Thang');
-        expect(memoise(key)).to.equal('Thing');
+        expect(memoise(key, () => 'Thang')).to.equal('Thing');
+        expect(memoise(key, () => 'Thong')).to.equal('Thing');
     });
 
     it('Should throw error when trying to memoise primitives', () =>
@@ -40,7 +35,8 @@ describe('memoise', () => {
         delete require.cache[require.resolve('.')];
         memoise = require('.').memoise;
 
-        memoise(key, () => 'Thang');
-        expect(memoise(key)).to.equal('Thang');
+        expect(() => memoise(key, () => 'Thang')).not.to.throw();
+        expect(memoise(key, () => 'Thang')).to.equal('Thang');
+        expect(memoise(key, () => 'Thong')).not.to.equal('Thang');
     });
 });
