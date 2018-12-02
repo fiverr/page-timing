@@ -1,7 +1,7 @@
 defaults: &defaults
   working_directory: ~/app
   docker:
-    - image: circleci/node:8-browsers
+    - image: circleci/node:10-browsers
 
 version: 2
 jobs:
@@ -50,7 +50,12 @@ jobs:
     steps:
       - run:
           name: Add to Glossary
-          command: curl ci-cd.net/v1/gh/run | bash -s fiverr glossary master "bin/trigger.sh" $GITHUB_API_TOKEN
+          command: |
+            curl --user ${CIRCLECI_API_TOKEN}: \
+              --header "Content-Type: application/json" \
+              --data "{\"build_parameters\":{\"TRIGGERING_REPOSITORY\":\"${CIRCLE_REPOSITORY_URL}\"}}" \
+              --request POST \
+              https://circleci.com/api/v1.1/project/github/fiverr/glossary/tree/master
 
 experimental:
   notify:

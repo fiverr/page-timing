@@ -1,3 +1,4 @@
 .*
 *.log
-src
+webpack.config.js
+spec.js
