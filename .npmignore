@@ -2,3 +2,4 @@
 *.log
 webpack.config.js
 spec.js
+index.html

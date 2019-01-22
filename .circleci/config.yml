@@ -44,7 +44,7 @@ jobs:
           command: echo -e $NPMRC > ~/.npmrc
       - run:
           name: Publish to NPM
-          command: npx published
+          command: npx published --git-tag
   glossary:
     <<: *defaults
     steps:

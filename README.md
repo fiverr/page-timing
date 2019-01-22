@@ -15,9 +15,38 @@ pageTiming({metrics: [], reducer: () => {}, accumulator = []});
 
 | Key | Role | Type | Default value
 | - | - | - | -
-| `metrics` | The metrics you'd like to collect | Array | All browser performance metrics
+| `metrics` | The metrics you'd like to collect | Array | See full list below
 | `reducer` | The reducer used to collect them | Function | `(a, [k, v]) => [...a, [k, v]]`
 | `accumulator` | Initial data structure to reduce on | Any | `[]`
+
+### Metrics list
+
+##### Browser performance metrics
+- `connectEnd`
+- `connectStart`
+- `domComplete`
+- `domContentLoadedEventEnd`
+- `domContentLoadedEventStart`
+- `domInteractive`
+- `domLoading`
+- `domainLookupEnd`
+- `domainLookupStart`
+- `fetchStart`
+- `loadEventEnd`
+- `loadEventStart`
+- `navigationStart`
+- `redirectEnd`
+- `redirectStart`
+- `requestStart`
+- `responseEnd`
+- `responseStart`
+- `secureConnectionStart`
+- `unloadEventEnd`
+- `unloadEventStart`
+
+##### Paint entries
+- `first-paint`
+- `first-contentful-paint`
 
 ## Usage
 
@@ -26,9 +55,9 @@ pageTiming({metrics: [], reducer: () => {}, accumulator = []});
 import { pageTiming } from 'page-timing';
 const metrics = ['domInteractive', 'loadEventEnd'];
 
-pageTiming({metrics});
-
-console.log(...results);
+window.addEventListener('load', () => {
+  send(pageTiming({metrics}));
+});
 ```
 Output
 ```json
@@ -46,9 +75,11 @@ Output
 
 ### StatsD messages format
 ```js
+import {snakeCase} from 'lodash';
+
 const now = Date.now();
 const reducer = (accumulator, [key, value]) =>
-  [...accumulator, `browser_performance.${page_name}.${key}:${parseInt(value)}|ms`]
+  [...accumulator, `browser_performance.${page_name}.${snakeCase(key)}:${parseInt(value)}|ms`]
 ;
 const results = pageTiming({
     reducer,
@@ -60,8 +91,9 @@ sendMetricsToStatsD(...results);
 Output
 ```json
 [
-  "browser_performance.homepage_loggedout.domInteractive:208|ms",
-  "browser_performance.homepage_loggedout.loadEventEnd:431|ms"
+  "browser_performance.homepage_loggedout.dom_interactive:208|ms",
+  "browser_performance.homepage_loggedout.first_contentful_paint:316|ms",
+  "browser_performance.homepage_loggedout.load_event_end:431|ms"
 ]
 ```
 
@@ -97,7 +129,16 @@ Output
   "page": "homepage_loggedout"
 }
 ```
-## Calculations used to analyse the results
+
+## Dist
+Browser entry (dist) exposes method as `pageTiming.pageTiming`:
+
+```js
+window.pageTiming.pageTiming(); // [...]
+```
+
+
+## Calculations used to analyse the performance results
 
 | Meaning | Calculation
 | - | -
