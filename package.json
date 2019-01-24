@@ -1,7 +1,7 @@
 {
   "name": "page-timing",
   "version": "1.0.4",
-  "description": "Measure browser timing and do something with it",
+  "description": "⏱ Measure browser timing and do something with it",
   "keywords": [
     "browser",
     "website",
@@ -10,7 +10,8 @@
     "speed",
     "loading",
     "navigation-timing",
-    "har"
+    "har",
+    "⏱"
   ],
   "author": "Fiverr SRE",
   "license": "MIT",
