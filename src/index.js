@@ -1,4 +1,5 @@
 import { performanceMetrics } from './performance-metrics';
+import { paintEntries } from './paint-entries';
 import { measure } from './measure';
 import { supported } from './supported';
 
@@ -11,21 +12,36 @@ const DEFAULT_REDUCER = (accumulator, [key, value]) => [...accumulator, [key, va
  * @param  {Any}      [options.accumulator] Reducer accumulator
  * @return {Any}
  */
-export const pageTiming = ({metrics, reducer = DEFAULT_REDUCER, accumulator = []} = {}) =>
-    supported() ?
-        performanceMetrics(metrics)
-            .reduce(
-                (results, metric, index, metrics) => {
-                    const value = measure(metric);
+export function pageTiming({metrics, reducer = DEFAULT_REDUCER, accumulator = []} = {}) {
+    if (!supported()) {
+        return accumulator;
+    }
 
-                    return value > 0 ?
-                        reducer(results, [metric, value], index, metrics)
-                        :
-                        results
-                    ;
-                },
-                accumulator
-            )
-        :
-        accumulator
-;
+    accumulator = performanceMetrics(metrics)
+        .reduce(
+            (accumulator, metric, index, metrics) => {
+                const value = measure(metric);
+
+                return value > 0 ?
+                    reducer(accumulator, [metric, value], index, metrics)
+                    :
+                    accumulator
+                ;
+            },
+            accumulator
+        );
+
+    accumulator = paintEntries(metrics)
+        .reduce(
+            (accumulator, {name, startTime}, index, metrics) =>
+                startTime > 0
+                    ?
+                    reducer(accumulator, [name, startTime], index, metrics)
+                    :
+                    accumulator
+            ,
+            accumulator
+        );
+
+    return accumulator;
+}

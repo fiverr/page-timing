@@ -1,4 +1,6 @@
 .*
 *.log
+CODE_OF_CONDUCT.md
 webpack.config.js
 spec.js
+index.html
