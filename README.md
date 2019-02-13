@@ -21,7 +21,7 @@ pageTiming({metrics: [], reducer: () => {}, accumulator = []});
 
 ### Metrics list
 
-##### Browser performance metrics
+##### [Navigation Timing](https://www.w3.org/TR/navigation-timing/#sec-navigation-timing-interface)
 - `connectEnd`
 - `connectStart`
 - `domComplete`
@@ -44,7 +44,7 @@ pageTiming({metrics: [], reducer: () => {}, accumulator = []});
 - `unloadEventEnd`
 - `unloadEventStart`
 
-##### Paint entries
+##### [Paint Timing](https://w3c.github.io/paint-timing/#sec-PerformancePaintTiming)
 - `first-paint`
 - `first-contentful-paint`
 
