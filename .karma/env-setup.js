@@ -1,4 +1,5 @@
-const sleep = (num = 0) => new Promise((resolve) => setTimeout(resolve, Math.min(num, 1500)));
+const wait = require('@lets/wait');
+const sleep = require('@lets/sleep');
 
 const onload = () => new Promise((resolve) => {
     isReady() || (document.onreadystatechange = isReady);
@@ -15,7 +16,7 @@ const onload = () => new Promise((resolve) => {
 
 Object.assign(
     global,
-    {sleep, onload},
+    {sleep, wait, onload},
     require('chai')
 );
 

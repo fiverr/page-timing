@@ -1,18 +1,18 @@
 import { pageTiming } from '.';
 
-const SLEEP_FOR = 400;
+const WAIT_FOR = 400;
 
 describe('page-timing', async() => {
     it('Should return result by default', async() => {
         await onload();
-        await sleep(SLEEP_FOR);
+        await wait(WAIT_FOR);
         const measurements = pageTiming();
         expect(measurements).to.have.lengthOf.at.least(5);
     });
 
     it('Should collect metrics as arrays of [key, value]', async() => {
         await onload();
-        await sleep(SLEEP_FOR);
+        await wait(WAIT_FOR);
         const measurements = pageTiming({
             metrics: ['domInteractive', 'loadEventEnd'],
         });
@@ -27,7 +27,7 @@ describe('page-timing', async() => {
 
     it('Should format metrics', async() => {
         await onload();
-        await sleep(SLEEP_FOR);
+        await wait(WAIT_FOR);
         const [interactive, load] = pageTiming({
             metrics: ['domInteractive', 'loadEventEnd'],
             reducer: (accumulator, [key, value]) => [

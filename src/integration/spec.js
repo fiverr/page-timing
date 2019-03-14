@@ -37,7 +37,7 @@ const results = Object.entries(mock).reduce(
 describe('Integration', async() => {
     delete require.cache[require.resolve('../')];
     delete require.cache[require.resolve('../start')];
-    delete require.cache[require.resolve('../measure')];
+    delete require.cache[require.resolve('../measurement')];
     require('../supported').supported(); // cached result
 
     const performance = Object.getOwnPropertyDescriptor(window, 'performance');
@@ -54,7 +54,7 @@ describe('Integration', async() => {
 
     it('Should extract all performance metrics to a structured object, and skip 0 values', async() => {
         await onload();
-        await sleep(400);
+        await wait(400);
 
         const pageTiming = require('../').pageTiming;
 
