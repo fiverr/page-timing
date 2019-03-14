@@ -7,10 +7,25 @@ This program collects each metrics' total time from `timeOrigin` (falls back to 
 Empty metrics (whose value is 0) will be omitted from the results.
 
 ## API
-The method accepts named arguments, all of which are optional
+- [`pageTiming`](#pageTiming)
+- [`measure`](#measure)
+
+## pageTiming
+Get a formatted object of page performance metrics.
 
 ```js
-pageTiming({metrics: [], reducer: () => {}, accumulator = []});
+import { pageTiming } from 'page-timing';
+const results = pageTiming();
+
+fetch('/send-metrics', {
+  method: 'POST',
+  body: JSON.stringify(results),
+});
+```
+
+The method accepts named arguments, all of which are optional
+```js
+const results = pageTiming({metrics: [], reducer: () => {}, accumulator = []});
 ```
 
 | Key | Role | Type | Default value
@@ -130,11 +145,34 @@ Output
 }
 ```
 
-## Dist
-Browser entry (dist) exposes method as `pageTiming.pageTiming`:
+## measure
+Wrap a function and measure it's execution time in milliseconds into a [performance measure](https://developer.mozilla.org/en-US/docs/Web/API/Performance/measure) entry.
 
 ```js
-window.pageTiming.pageTiming(); // [...]
+import { measure } from 'page-timing';
+
+await pageTiming.measure(wait, 'my-function');
+
+// Example: Convert entries to a named array
+performance.getEntriesByType('measure').reduce(
+  (accumulator, {name, duration}) => Object.assign(accumulator, {[name]: duration}),
+  {}
+);
+// {my-function: 53.35999990347773}
+
+// Example: Retrieve a specific entry
+const { duration } = performance.getEntriesByType('measure')
+  .find(({name}) => name === 'my-function');
+// 53.35999990347773
+```
+
+## Dist
+Browser entry (dist) exposes methods as `pageTiming.pageTiming` and `pageTiming.measure`:
+
+```js
+const results = window.pageTiming.pageTiming(); // [...]
+
+window.pageTiming.measure(myFunction, 'my-function');
 ```
 
 
@@ -156,4 +194,4 @@ window.pageTiming.pageTiming(); // [...]
 | download Time | `responseEnd - responseStart`
 | DOM Content loaded event time | `domContentLoadedEventEnd - domContentLoadedEventStart`
 
-![](https://www.w3.org/TR/navigation-timing/timing-overview.png)
+[![](https://www.w3.org/TR/navigation-timing/timing-overview.png)](https://www.w3.org/TR/navigation-timing/)

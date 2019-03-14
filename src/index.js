@@ -1,7 +1,8 @@
 import { performanceMetrics } from './performance-metrics';
 import { paintEntries } from './paint-entries';
-import { measure } from './measure';
+import { measurement } from './measurement';
 import { supported } from './supported';
+export { measure } from './measure';
 
 const DEFAULT_REDUCER = (accumulator, [key, value]) => [...accumulator, [key, value]];
 
@@ -20,7 +21,7 @@ export function pageTiming({metrics, reducer = DEFAULT_REDUCER, accumulator = []
     accumulator = performanceMetrics(metrics)
         .reduce(
             (accumulator, metric, index, metrics) => {
-                const value = measure(metric);
+                const value = measurement(metric);
 
                 return value > 0 ?
                     reducer(accumulator, [metric, value], index, metrics)

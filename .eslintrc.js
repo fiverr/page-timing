@@ -26,6 +26,7 @@ module.exports = {
                 expect: true,
                 assert: true,
                 sleep: true,
+                wait: true,
                 onload: true,
             },
             rules: {

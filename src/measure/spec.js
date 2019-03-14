@@ -1,29 +1,40 @@
 const { measure } = require('.');
 
 describe('measure', () => {
-    const performance = Object.getOwnPropertyDescriptor(window, 'performance');
-
-    afterEach(() =>
-        Object.defineProperty(window, 'performance', performance)
-    );
-
-    it('Should return the diff between timing metric to start point', () => {
-        window.performance = {
-            timeOrigin: 100,
-            timing: {
-                something: 250,
-            },
-        };
-        expect(measure('something')).to.equal(150);
+    beforeEach(() => {
+        performance.clearMarks();
     });
+    it('Should add a measure entry for an async function', async() => {
+        await measure(
+            async() => await wait(50),
+            'my-function'
+        );
+        const [{duration, name}] = performance.getEntriesByType('measure');
 
-    it('Should return 0 if the time unit it lower than start (e.g. 0)', () => {
-        window.performance = {
-            timeOrigin: 100,
-            timing: {
-                something: 50,
+        expect(name).to.equal('my-function');
+        expect(duration).to.be.at.least(50);
+        expect(duration).to.be.at.most(100);
+    });
+    it('Should add a measure entry for a sync function', () => {
+        measure(
+            () => sleep(50),
+            'my-function'
+        );
+
+        const [{duration, name}] = performance.getEntriesByType('measure');
+
+        expect(name).to.equal('my-function');
+        expect(duration).to.be.at.least(50);
+        expect(duration).to.be.at.most(100);
+    });
+    it('Should return original function return value', async() => {
+        const result = await measure(
+            async() => {
+                await wait(50);
+                return [1, 2, 3];
             },
-        };
-        expect(measure('something')).to.equal(0);
+            'my-function'
+        );
+        expect(result).to.deep.equal([1, 2, 3]);
     });
 });
