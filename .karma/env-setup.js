@@ -1,22 +1,5 @@
-const wait = require('@lets/wait');
-const sleep = require('@lets/sleep');
-
-const onload = () => new Promise((resolve) => {
-    isReady() || (document.onreadystatechange = isReady);
-
-    function isReady() {
-        if (document.readyState === 'complete') {
-            resolve();
-            return true;
-        };
-        return false;
-    }
-});
-
-
 Object.assign(
     global,
-    {sleep, wait, onload},
     require('chai')
 );
 

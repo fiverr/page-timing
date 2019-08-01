@@ -1,4 +1,5 @@
 const {resolve} = require('path');
+
 const {NODE_ENV = 'production'} = process.env;
 
 module.exports = {
@@ -8,7 +9,7 @@ module.exports = {
         path: resolve(__dirname, 'dist'),
         filename: 'main.js',
         library: 'pageTiming',
-        libraryTarget: 'umd2',
+        libraryTarget: 'umd2'
     },
     module: {
         rules: [
@@ -17,9 +18,9 @@ module.exports = {
                 loader: 'babel-loader',
                 include: resolve('../src'),
                 sideEffects: false,
-                options: require('./.babelrc.js'),
-            },
-        ],
+                options: require('./.babelrc.js')
+            }
+        ]
     },
-    target: 'web',
+    target: 'web'
 };

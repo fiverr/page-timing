@@ -1,4 +1,4 @@
-const { measurement } = require('.');
+import { measurement } from '.';
 
 describe('measurement', () => {
     const performance = Object.getOwnPropertyDescriptor(window, 'performance');
@@ -11,8 +11,8 @@ describe('measurement', () => {
         window.performance = {
             timeOrigin: 100,
             timing: {
-                something: 250,
-            },
+                something: 250
+            }
         };
         expect(measurement('something')).to.equal(150);
     });
@@ -21,8 +21,8 @@ describe('measurement', () => {
         window.performance = {
             timeOrigin: 100,
             timing: {
-                something: 50,
-            },
+                something: 50
+            }
         };
         expect(measurement('something')).to.equal(0);
     });

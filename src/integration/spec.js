@@ -1,3 +1,6 @@
+import wait from '@lets/wait';
+import { onload } from '../spec-helper';
+
 const timeOrigin = 1;
 
 const mock = {
@@ -21,7 +24,7 @@ const mock = {
     domContentLoadedEventEnd: 230,
     loadEventStart: 240,
     domComplete: 250,
-    loadEventEnd: 260,
+    loadEventEnd: 260
 };
 
 const results = Object.entries(mock).reduce(
@@ -45,7 +48,7 @@ describe('Integration', async() => {
     beforeEach(() => {
         window.performance = {
             timeOrigin,
-            timing: mock,
+            timing: mock
         };
     });
     afterEach(() => {
@@ -66,12 +69,12 @@ describe('Integration', async() => {
 
         pageTiming({
             reducer,
-            accumulator: obj.metrics,
+            accumulator: obj.metrics
         });
 
         expect(obj).to.deep.equal({
             key: 'value',
-            metrics: results,
+            metrics: results
         });
     });
 });

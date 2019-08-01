@@ -1,4 +1,5 @@
 const memoiseModule = require('../memoise');
+
 memoiseModule.memoise = (key, fn) => fn();
 
 describe('start', () => {

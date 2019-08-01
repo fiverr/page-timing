@@ -26,7 +26,7 @@ describe('memoise', () => {
         [
             '',
             Symbol(),
-            4,
+            4
         ].forEach((key) => expect(() => memoise(key, () => 'Thing')).to.throw())
     );
 

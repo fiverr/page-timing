@@ -1,6 +1,7 @@
-const { performanceMetrics } = require('.');
+import { performanceMetrics } from '.';
+
 const IGNORE = [
-    'toJSON',
+    'toJSON'
 ];
 
 describe('performance-metrics', () => {

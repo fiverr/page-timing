@@ -1,4 +1,5 @@
 import { memoise } from '../memoise';
+
 const key = {};
 
 /**
