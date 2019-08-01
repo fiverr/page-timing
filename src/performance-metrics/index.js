@@ -19,7 +19,7 @@ const PERFORMANCE_METRICS = [
     'responseStart',
     'secureConnectionStart',
     'unloadEventEnd',
-    'unloadEventStart',
+    'unloadEventStart'
 ];
 
 /**

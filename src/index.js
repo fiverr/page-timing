@@ -2,6 +2,7 @@ import { performanceMetrics } from './performance-metrics';
 import { paintEntries } from './paint-entries';
 import { measurement } from './measurement';
 import { supported } from './supported';
+
 export { measure } from './measure';
 
 const DEFAULT_REDUCER = (accumulator, [key, value]) => [...accumulator, [key, value]];

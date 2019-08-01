@@ -1,9 +1,9 @@
 defaults: &defaults
   working_directory: ~/app
   docker:
-    - image: circleci/node:10-browsers
+    - image: circleci/node:12-browsers
 
-version: 2
+version: 2.1
 jobs:
   dependencies:
     <<: *defaults
@@ -32,7 +32,7 @@ jobs:
           command: npm t
       - run:
           name: Code linting
-          command: npm run lint
+          command: npm run lint --plugin log
   publish:
     <<: *defaults
     steps:
@@ -64,7 +64,7 @@ experimental:
         - master
 
 workflows:
-  version: 2
+  version: 2.1
   ci-cd:
     jobs:
       - dependencies:

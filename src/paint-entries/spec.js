@@ -1,4 +1,4 @@
-const { paintEntries } = require('.');
+import { paintEntries } from '.';
 
 describe('paint-entries', () => {
     const getEntriesByType = window.performance.getEntriesByType;
@@ -8,14 +8,14 @@ describe('paint-entries', () => {
                 name: 'first-paint',
                 entryType: 'paint',
                 startTime: 2505276.299999998,
-                duration: 0,
+                duration: 0
             },
             {
                 name: 'first-contentful-paint',
                 entryType: 'paint',
                 startTime: 2505276.299999998,
-                duration: 0,
-            },
+                duration: 0
+            }
         ];
     });
     after(() => {

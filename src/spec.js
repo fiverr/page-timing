@@ -1,3 +1,5 @@
+import wait from '@lets/wait';
+import { onload } from './spec-helper';
 import { pageTiming } from '.';
 
 const WAIT_FOR = 400;
@@ -14,7 +16,7 @@ describe('page-timing', async() => {
         await onload();
         await wait(WAIT_FOR);
         const measurements = pageTiming({
-            metrics: ['domInteractive', 'loadEventEnd'],
+            metrics: ['domInteractive', 'loadEventEnd']
         });
         expect(measurements).to.have.lengthOf(2);
         measurements.forEach(
@@ -32,8 +34,8 @@ describe('page-timing', async() => {
             metrics: ['domInteractive', 'loadEventEnd'],
             reducer: (accumulator, [key, value]) => [
                 ...accumulator,
-                ['prefix', key, Math.round(value)].join(':'),
-            ],
+                ['prefix', key, Math.round(value)].join(':')
+            ]
         });
 
         expect(interactive).to.match(/prefix:domInteractive:(\d{2,4})/);
