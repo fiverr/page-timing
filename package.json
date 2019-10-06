@@ -1,6 +1,6 @@
 {
   "name": "page-timing",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "⏱ Measure browser timing and do something with it",
   "keywords": [
     "browser",
@@ -43,6 +43,7 @@
     "@lets/wait": "^1.0.0",
     "babel-loader": "^8.0.6",
     "chai": "^4.2.0",
+    "ecma-webpack-plugin": "0.0.0",
     "eslint": "^6.5.1",
     "eslint-plugin-log": "^1.2.3",
     "karma": "^4.3.0",

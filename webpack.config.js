@@ -1,6 +1,7 @@
-const {resolve} = require('path');
+const { resolve } = require('path');
+const EcmaPlugin = require('ecma-webpack-plugin');
 
-const {NODE_ENV = 'production'} = process.env;
+const { NODE_ENV = 'production' } = process.env;
 
 module.exports = {
     mode: NODE_ENV,
@@ -16,11 +17,14 @@ module.exports = {
             {
                 test: /\.js$/,
                 loader: 'babel-loader',
-                include: resolve('../src'),
+                include: resolve('./src'),
                 sideEffects: false,
                 options: require('./.babelrc.js')
             }
         ]
     },
+    plugins: [
+        new EcmaPlugin({parser: {ecmaVersion: '5'}})
+    ],
     target: 'web'
 };
