@@ -118,11 +118,19 @@ const reducer = (accumulator, [key, value]) => Object.assign(
     accumulator,
     {[key]: parseFloat(value.toFixed(2))}
 );
+
 const event = {
     group: "performance",
     type: "browser_performance",
     timings: {},
-    page: "homepage_loggedout"
+    page: "homepage_loggedout",
+
+    // Add some information about connectivity
+    connectivity: {
+      type: navigator.connection.effectiveType || navigator.connection.type,
+      roundtrip: navigator.connection.rtt,
+      mbps: navigator.connection.downlink
+    }
 };
 pageTiming({
     reducer,
