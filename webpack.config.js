@@ -24,7 +24,7 @@ module.exports = {
         ]
     },
     plugins: [
-        new EcmaPlugin({parser: {ecmaVersion: '5'}})
+        new EcmaPlugin({ parser: { ecmaVersion: '5' } })
     ],
     target: 'web'
 };

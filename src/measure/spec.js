@@ -11,7 +11,7 @@ describe('measure', () => {
             async() => await wait(50),
             'my-function'
         );
-        const [{duration, name}] = performance.getEntriesByType('measure');
+        const [{ duration, name }] = performance.getEntriesByType('measure');
 
         expect(name).to.equal('my-function');
         expect(duration).to.be.at.least(50);
@@ -23,7 +23,7 @@ describe('measure', () => {
             'my-function'
         );
 
-        const [{duration, name}] = performance.getEntriesByType('measure');
+        const [{ duration, name }] = performance.getEntriesByType('measure');
 
         expect(name).to.equal('my-function');
         expect(duration).to.be.at.least(50);

@@ -15,12 +15,12 @@ describe('start', () => {
     );
 
     it('Should retrieve timeOrigin when available', () => {
-        window.performance = {timeOrigin: 2};
+        window.performance = { timeOrigin: 2 };
         expect(start()).to.equal(2);
     });
 
     it('Should retrieve a number', () => {
-        window.performance = {timeOrigin: 0, timing: {navigationStart: 5}};
+        window.performance = { timeOrigin: 0, timing: { navigationStart: 5 } };
         expect(start()).to.equal(5);
     });
 });

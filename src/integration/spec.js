@@ -31,7 +31,7 @@ const results = Object.entries(mock).reduce(
     (results, [key, value]) =>
         value > timeOrigin
             ?
-            Object.assign(results, {[key]: value - timeOrigin})
+            Object.assign(results, { [key]: value - timeOrigin })
             :
             results,
     {}
@@ -61,10 +61,10 @@ describe('Integration', async() => {
 
         const pageTiming = require('../').pageTiming;
 
-        const obj = {key: 'value', metrics: {}};
+        const obj = { key: 'value', metrics: {} };
         const reducer = (accumulator, [key, value]) => Object.assign(
             accumulator,
-            {[key]: parseInt(value, 10)}
+            { [key]: parseInt(value, 10) }
         );
 
         pageTiming({
