@@ -14,7 +14,7 @@ const DEFAULT_REDUCER = (accumulator, [key, value]) => [...accumulator, [key, va
  * @param  {Any}      [options.accumulator] Reducer accumulator
  * @return {Any}
  */
-export function pageTiming({metrics, reducer = DEFAULT_REDUCER, accumulator = []} = {}) {
+export function pageTiming({ metrics, reducer = DEFAULT_REDUCER, accumulator = [] } = {}) {
     if (!supported()) {
         return accumulator;
     }
@@ -35,7 +35,7 @@ export function pageTiming({metrics, reducer = DEFAULT_REDUCER, accumulator = []
 
     accumulator = paintEntries(metrics)
         .reduce(
-            (accumulator, {name, startTime}, index, metrics) =>
+            (accumulator, { name, startTime }, index, metrics) =>
                 startTime > 0
                     ?
                     reducer(accumulator, [name, startTime], index, metrics)

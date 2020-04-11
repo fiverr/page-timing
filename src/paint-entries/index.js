@@ -5,4 +5,4 @@ const all = () => window.performance.getEntriesByType ? window.performance.getEn
  * @param  {String[]} metrics
  * @return {String}
  */
-export const paintEntries = (metrics) => metrics ? all().filter(({name}) => metrics.includes(name)) : all();
+export const paintEntries = (metrics) => metrics ? all().filter(({ name }) => metrics.includes(name)) : all();

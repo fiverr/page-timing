@@ -5,7 +5,7 @@
  * @return {Any}           original method return value
  */
 export async function measure(fn, name) {
-    const {performance} = window;
+    const { performance } = window;
     const unique = Math.random().toString(32).substr(2);
 
     const [start, end] = ['start', 'end'].map(
