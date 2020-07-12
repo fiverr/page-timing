@@ -30,7 +30,7 @@ var end = Date.now() + 2000;
 while (Date.now() < end) {
   /*...*/
 }</script>
-    <script src="script.e590495f.js"></script>
+    <script src="script.ed0de6b0.js"></script>
     <script>function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -57,19 +57,18 @@ function print() {
 
 window.addEventListener('load', function () {
   Object.assign(window.performance_information, all());
-  print(); // [
-  //     [getLCP, 'largest_contentful_paint'],
-  //     [getFID, 'first_input_delay'],
-  //     [getCLS, 'comulative_layout_shift'],
-  // ].forEach(
-  //     ([ fn, name ]) => fn(
-  //         ({ value }) => {
-  //             window.performance_information[name] = value;
-  //             print();
-  //         }
-  //     )
-  // );
+  print();
+  [[getLCP, 'largest_contentful_paint'], [getFID, 'first_input_delay'], [getCLS, 'comulative_layout_shift']].forEach(function (_ref3) {
+    var _ref4 = _slicedToArray(_ref3, 2),
+        fn = _ref4[0],
+        name = _ref4[1];
 
+    return fn(function (_ref5) {
+      var value = _ref5.value;
+      window.performance_information[name] = value;
+      print();
+    });
+  });
   fps().then(function (result) {
     window.performance_information.frames_per_second = result;
     print();
