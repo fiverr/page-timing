@@ -1,6 +1,6 @@
 {
   "name": "page-timing",
-  "version": "2.0.0-alpha.6",
+  "version": "2.0.0",
   "description": "⏱ Collect and measure browser performance metrics",
   "keywords": [
     "browser",
@@ -19,7 +19,7 @@
     "type": "git",
     "url": "git+https://github.com/fiverr/page-timing.git"
   },
-  "homepage": "https://github.com/fiverr/page-timing#readme",
+  "homepage": "https://fiverr.github.io/page-timing",
   "main": "src/index.js",
   "module": "src/index.js",
   "browser": "src/index.js",
@@ -27,6 +27,7 @@
   "sideEffects": false,
   "scripts": {
     "prestart": "which parcel || npm i parcel-bundler --no-save",
+    "prebuild": "which parcel || npm i parcel-bundler --no-save",
     "start": "parcel play/index.html",
     "build": "parcel build play/index.html --public-url .",
     "test": "NODE_ENV=test node --max_old_space_size=2048 ./node_modules/karma/bin/karma start .karma/index.js --loglevel debug",
