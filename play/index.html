@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>page-timing</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
+        <link rel="shortcut icon" href="https://www.fiverr.com/favicon.ico">
+        <link rel="stylesheet" href="https://code.jquery.com/ui/jquery-ui-git.css">
+        <style>
+* { font-family: monospace; }
+table {
+    border-collapse:
+    collapse; float: right;
+    margin: 1em 1em 4em;
+    border: 1px solid rgba(0, 0, 0, .1);
+}
+tr:nth-child(even) { background: rgba(0, 0, 0, .05) }
+td:nth-child(1) { font-weight: bold; }
+td { padding: .2em 1em }
+        </style>
+    </head>
+    <body>
+    <table><tr><td>Loading...</tr><td></table>
+    <h1>Page Timing <a href="https://www.npmjs.com/package/page-timing" rel="nofollow"><img src="https://img.shields.io/npm/v/page-timing.svg"></a> <a href="https://github.com/fiverr/page-timing" rel="nofollow"><img src="https://img.shields.io/badge/source--000000.svg?logo=github&style=social"></a> <a href="https://circleci.com/gh/fiverr/page-timing" rel="nofollow"><img src="https://circleci.com/gh/fiverr/page-timing.svg?style=svg"></a> <a href="https://bundlephobia.com/result?p=page-timing" rel="nofollow"><img src="https://badgen.net/bundlephobia/minzip/page-timing"></a></h1>
+    <p>⏱ Collect and measure browser performance metrics</p>
+
+    <p><img src="https://dummyimage.com/1000x700/ffeedd/000000.png" width="100" alt="alt text"></p>
+    <script>
+        // Delay everything by 2 seconds
+        const end = Date.now() + 2000;
+        while(Date.now() < end) {/*...*/}
+    </script>
+    <script src="script.js"></script>
+    <script>
+        window.performance_information = {};
+        function print() {
+            document.querySelector('table').innerHTML = Object.entries(window.performance_information).map(
+                ([key, value]) => `<tr><td>${key}</td><td>${value}</td></tr>`
+            ).join('');
+        }
+
+        window.addEventListener(
+            'load',
+            () => {
+                Object.assign(window.performance_information, all());
+                print();
+                [
+                    [getLCP, 'largest_contentful_paint'],
+                    [getFID, 'first_input_delay'],
+                    [getCLS, 'comulative_layout_shift'],
+                ].forEach(
+                    ([ fn, name ]) => fn(
+                        ({ value }) => {
+                            window.performance_information[name] = value;
+                            print();
+                        }
+                    )
+                );
+
+                fps().then(result => {
+                    window.performance_information.frames_per_second = result;
+                    print()
+                })
+            }
+        );
+    </script>
+    <script async>
+        // Delay everything by 2 seconds
+        const end = Date.now() + 2000;
+        while(Date.now() < end) {/*...*/}
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r118/three.min.js"></script>
+    </body>
+</html>

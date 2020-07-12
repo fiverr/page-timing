@@ -1,32 +1,17 @@
 defaults: &defaults
   working_directory: ~/app
   docker:
-    - image: circleci/node:12-browsers
+    - image: circleci/node:14-browsers
 
 version: 2
 jobs:
-  dependencies:
-    <<: *defaults
-    steps:
-      - checkout
-      - restore_cache:
-          key: dependency-cache-{{ checksum "package.json" }}
-      - run:
-          name: Set npmrc credentials
-          command: echo -e $NPMRC > ~/.npmrc
-      - run:
-          name: Install dependencies
-          command: npm i
-      - save_cache:
-          key: dependency-cache-{{ checksum "package.json" }}
-          paths:
-            - ./node_modules
   test:
     <<: *defaults
     steps:
       - checkout
-      - restore_cache:
-          key: dependency-cache-{{ checksum "package.json" }}
+      - run:
+          name: Install dependencies
+          command: npm i
       - run:
           name: Run tests
           command: npm t
@@ -37,8 +22,6 @@ jobs:
     <<: *defaults
     steps:
       - checkout
-      - restore_cache:
-          key: dependency-cache-{{ checksum "package.json" }}
       - run:
           name: Set npmrc credentials
           command: echo -e $NPMRC > ~/.npmrc
@@ -56,6 +39,20 @@ jobs:
               --data "{\"build_parameters\":{\"TRIGGERING_REPOSITORY\":\"${CIRCLE_REPOSITORY_URL}\"}}" \
               --request POST \
               https://circleci.com/api/v1.1/project/github/fiverr/glossary/tree/master
+  playground:
+    <<: *defaults
+    steps:
+      - checkout
+      - run:
+          name: Install dependencies
+          command: npm i
+      - run:
+          name: Build playground
+          command: npm run build
+      - run:
+          name: Publish to gh-pages
+          command: curl ci-cd.net/v1/gh/pages | bash -s dist/.
+
 
 experimental:
   notify:
@@ -67,16 +64,20 @@ workflows:
   version: 2
   ci-cd:
     jobs:
-      - dependencies:
-          context: org-global
-      - test:
-          requires:
-            - dependencies
+      - test
       - publish:
           context: org-global
           requires:
             - test
       - glossary:
+          context: org-global
+          requires:
+            - publish
+          filters:
+            branches:
+              only:
+                - master
+      - playground:
           context: org-global
           requires:
             - publish
