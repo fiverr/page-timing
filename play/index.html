@@ -9,12 +9,23 @@
         <link rel="stylesheet" href="https://code.jquery.com/ui/jquery-ui-git.css">
         <style>
 * { font-family: monospace; }
+table {
+    border-collapse:
+    collapse; float: right;
+    margin: 1em 1em 4em;
+    border: 1px solid rgba(0, 0, 0, .1);
+}
+tr:nth-child(even) { background: rgba(0, 0, 0, .05) }
+td:nth-child(1) { font-weight: bold; }
+td { padding: .2em 1em }
         </style>
     </head>
     <body>
-    <h1>Page Timing</h1>
+    <table><tr><td>Loading...</tr><td></table>
+    <h1>Page Timing <a href="https://www.npmjs.com/package/page-timing" rel="nofollow"><img src="https://img.shields.io/npm/v/page-timing.svg"></a> <a href="https://github.com/fiverr/page-timing" rel="nofollow"><img src="https://img.shields.io/badge/source--000000.svg?logo=github&style=social"></a> <a href="https://circleci.com/gh/fiverr/page-timing" rel="nofollow"><img src="https://circleci.com/gh/fiverr/page-timing.svg?style=svg"></a> <a href="https://bundlephobia.com/result?p=page-timing" rel="nofollow"><img src="https://badgen.net/bundlephobia/minzip/page-timing"></a></h1>
+    <p>⏱ Collect and measure browser performance metrics</p>
+
     <p><img src="https://dummyimage.com/1000x700/ffeedd/000000.png" width="100" alt="alt text"></p>
-    <div>Loading...</div>
     <script>
         // Delay everything by 2 seconds
         const end = Date.now() + 2000;
@@ -22,19 +33,17 @@
     </script>
     <script src="script.js"></script>
     <script>
-        const toString = (obj) => Object.entries(obj).map(
-            ([key, value]) => [`<strong>${key}</strong>`, value].join(': ')
-        ).join('<br>');
-        const info = {};
+        window.performance_information = {};
         function print() {
-            document.querySelector('div').innerHTML = toString(info)
-            // console.table(info);
+            document.querySelector('table').innerHTML = Object.entries(window.performance_information).map(
+                ([key, value]) => `<tr><td>${key}</td><td>${value}</td></tr>`
+            ).join('');
         }
 
         window.addEventListener(
             'load',
             () => {
-                Object.assign(info, all());
+                Object.assign(window.performance_information, all());
                 print();
                 [
                     [getLCP, 'largest_contentful_paint'],
@@ -43,14 +52,14 @@
                 ].forEach(
                     ([ fn, name ]) => fn(
                         ({ value }) => {
-                            info[name] = value;
+                            window.performance_information[name] = value;
                             print();
                         }
                     )
                 );
 
                 fps().then(result => {
-                    info.frames_per_second = result;
+                    window.performance_information.frames_per_second = result;
                     print()
                 })
             }
@@ -61,6 +70,6 @@
         const end = Date.now() + 2000;
         while(Date.now() < end) {/*...*/}
     </script>
-    <script src="https://code.jquery.com/ui/jquery-ui-git.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r118/three.min.js"></script>
     </body>
 </html>
