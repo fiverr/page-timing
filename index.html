@@ -7,14 +7,23 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
         <link rel="shortcut icon" href="https://www.fiverr.com/favicon.ico">
         <link rel="stylesheet" href="https://code.jquery.com/ui/jquery-ui-git.css">
-        <style>* { font-family: monospace; }</style>
+        <style>* { font-family: monospace; }
+table {
+    border-collapse:
+    collapse; float: right;
+    margin: 1em 1em 4em;
+    border: 1px solid rgba(0, 0, 0, .1);
+}
+tr:nth-child(even) { background: rgba(0, 0, 0, .05) }
+td:nth-child(1) { font-weight: bold; }
+td { padding: .2em 1em }</style>
     </head>
     <body>
+    <table><tr><td>Loading...</td></tr><td></td></table>
     <h1>Page Timing <a href="https://www.npmjs.com/package/page-timing" rel="nofollow"><img src="https://img.shields.io/npm/v/page-timing.svg"></a> <a href="https://github.com/fiverr/page-timing" rel="nofollow"><img src="https://img.shields.io/badge/source--000000.svg?logo=github&style=social"></a> <a href="https://circleci.com/gh/fiverr/page-timing" rel="nofollow"><img src="https://circleci.com/gh/fiverr/page-timing.svg?style=svg"></a> <a href="https://bundlephobia.com/result?p=page-timing" rel="nofollow"><img src="https://badgen.net/bundlephobia/minzip/page-timing"></a></h1>
     <p>⏱ Collect and measure browser performance metrics</p>
 
     <p><img src="https://dummyimage.com/1000x700/ffeedd/000000.png" width="100" alt="alt text"></p>
-    <div>Loading...</div>
     <script>// Delay everything by 2 seconds
 var end = Date.now() + 2000;
 
@@ -37,13 +46,13 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 window.performance_information = {};
 
 function print() {
-  document.querySelector('div').innerHTML = Object.entries(window.performance_information).map(function (_ref) {
+  document.querySelector('table').innerHTML = Object.entries(window.performance_information).map(function (_ref) {
     var _ref2 = _slicedToArray(_ref, 2),
         key = _ref2[0],
         value = _ref2[1];
 
-    return ["<strong>".concat(key, "</strong>"), value].join(': ');
-  }).join('<br>');
+    return "<tr><td>".concat(key, "</td><td>").concat(value, "</td></tr>");
+  }).join('');
 }
 
 window.addEventListener('load', function () {
