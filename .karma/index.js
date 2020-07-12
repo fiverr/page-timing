@@ -7,19 +7,6 @@ const pattern = ((args) =>
     `../src/${args.length ? `**/+(${args.join('|')})` : '**'}/spec.js`
 )(JSON.parse(process.env.npm_config_argv).remain);
 
-const webpack = {
-    module: {
-        rules: [
-            {
-                test: /\.js$/,
-                loader: 'babel-loader',
-                include: resolve('../src'),
-                sideEffects: false,
-            },
-        ],
-    },
-};
-
 module.exports = (config) => {
     const {LOG_INFO} = config;
 
@@ -45,7 +32,7 @@ module.exports = (config) => {
                 noInfo: true,
                 stats: 'errors-only',
             },
-            webpack,
+            webpack: {},
             files: [
                 ENV_SETUP,
                 { pattern, watch },

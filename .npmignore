@@ -1,6 +1,7 @@
 .*
 *.log
 CODE_OF_CONDUCT.md
-webpack.config.js
+play
+dist
 spec.js
-index.html
+spec-helpers
