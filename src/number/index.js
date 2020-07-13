@@ -1,3 +1,7 @@
+const parseFloat = Number.parseFloat || window.parseFloat;
+const isNaN = Number.isNaN || window.isNaN;
+const isFinite = Number.isFinite || window.isFinite;
+
 /**
  * @param {number}
  * @returns {number?}
@@ -7,9 +11,9 @@ export function number(input) {
         return;
     }
 
-    const value = Number.parseFloat(input);
+    const value = parseFloat(input);
 
-    if (Number.isNaN(value)) {
+    if (isNaN(value)) {
         return;
     }
 
@@ -17,7 +21,7 @@ export function number(input) {
         return;
     }
 
-    if (Number.isFinite(value)) {
+    if (isFinite(value)) {
         return value;
     }
 }
