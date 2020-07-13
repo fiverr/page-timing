@@ -399,19 +399,22 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.number = number;
-
+var parseFloat = Number.parseFloat || window.parseFloat;
+var isNaN = Number.isNaN || window.isNaN;
+var isFinite = Number.isFinite || window.isFinite;
 /**
  * @param {number}
  * @returns {number?}
  */
+
 function number(input) {
   if (typeof input !== 'number') {
     return;
   }
 
-  var value = Number.parseFloat(input);
+  var value = parseFloat(input);
 
-  if (Number.isNaN(value)) {
+  if (isNaN(value)) {
     return;
   }
 
@@ -419,7 +422,7 @@ function number(input) {
     return;
   }
 
-  if (Number.isFinite(value)) {
+  if (isFinite(value)) {
     return value;
   }
 }
@@ -1004,4 +1007,4 @@ Object.assign(window, {
   getCLS: _webVitals.getCLS
 });
 },{"web-vitals":"Qvvn","../src/index.js":"uBxZ"}]},{},["mpVp"], null)
-//# sourceMappingURL=script.ed0de6b0.js.map
+//# sourceMappingURL=script.95e614c1.js.map
