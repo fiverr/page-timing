@@ -1,6 +1,7 @@
 const parseFloat = Number.parseFloat || window.parseFloat;
 const isNaN = Number.isNaN || window.isNaN;
 const isFinite = Number.isFinite || window.isFinite;
+const { MAX_SAFE_INTEGER = 9007199254740991 } = Number;
 
 /**
  * @param {number}
@@ -21,7 +22,13 @@ export function number(input) {
         return;
     }
 
-    if (isFinite(value)) {
-        return value;
+    if (!isFinite(value)) {
+        return;
     }
+
+    if (value > MAX_SAFE_INTEGER) {
+        return MAX_SAFE_INTEGER;
+    }
+
+    return value;
 }
