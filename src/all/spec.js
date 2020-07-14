@@ -8,6 +8,7 @@ const connection = { connection: Symbol() };
 const memory = { memory: Symbol() };
 const display = { display: Symbol() };
 const dom = { dom: Symbol() };
+const elapsed = { elapsed: Symbol() };
 
 describe('all', () => {
     before(() => {
@@ -18,7 +19,8 @@ describe('all', () => {
             connection,
             memory,
             display,
-            dom
+            dom,
+            elapsed
         }).forEach(
             ([key, value]) => {
                 require(`../${key}`);
@@ -44,7 +46,8 @@ describe('all', () => {
                 ...connection,
                 ...memory,
                 ...display,
-                ...dom
+                ...dom,
+                ...elapsed
             }
         );
     });
@@ -57,7 +60,8 @@ describe('all', () => {
             connection,
             memory,
             display,
-            dom
+            dom,
+            elapsed
         ].forEach((item) => expect(all()).not.to.equal(item));
     });
 });

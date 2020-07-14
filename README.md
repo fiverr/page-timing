@@ -35,6 +35,7 @@ window.addEventListener(
 - `memory`: [Memory API information](https://developer.mozilla.org/en-US/docs/Web/API/Performance/memory)
 - `display`: Screen and document information
 - `dom`: Calculated metrics from the document object
+- `elapsed`: Time when the measurements were taken
 - `all`: A compound object containing all of the above
 - [`measure`](#measure): A helper function: Add measure entries to [navigation timing API](https://www.w3.org/TR/navigation-timing/)
 
@@ -97,6 +98,7 @@ window.addEventListener(
 | **dom** | `final_dom_node_count` | _number_ | Total number of nodes under the document object
 | **dom** | `final_dom_nest_depth` | _number_ | Highest nesting depth of DOM element under the document
 | **dom** | `final_html_size` | _number_ | Character count of the HTML document
+| **elapsed** | `page_time_elapsed` | _number_ | milliseconds elapsed since the time origin
 
 > † **contentful** element: A visible element which contains non empty text, media content or input.
 

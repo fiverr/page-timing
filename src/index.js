@@ -2,6 +2,7 @@ export { assets } from './assets';
 export { connection } from './connection';
 export { display } from './display';
 export { dom } from './dom';
+export { elapsed } from './elapsed';
 export { memory } from './memory';
 export { navigation } from './navigation';
 export { paint } from './paint';
