@@ -402,6 +402,8 @@ exports.number = number;
 var parseFloat = Number.parseFloat || window.parseFloat;
 var isNaN = Number.isNaN || window.isNaN;
 var isFinite = Number.isFinite || window.isFinite;
+var _Number$MAX_SAFE_INTE = Number.MAX_SAFE_INTEGER,
+    MAX_SAFE_INTEGER = _Number$MAX_SAFE_INTE === void 0 ? 9007199254740991 : _Number$MAX_SAFE_INTE;
 /**
  * @param {number}
  * @returns {number?}
@@ -422,9 +424,15 @@ function number(input) {
     return;
   }
 
-  if (isFinite(value)) {
-    return value;
+  if (!isFinite(value)) {
+    return;
   }
+
+  if (value > MAX_SAFE_INTEGER) {
+    return MAX_SAFE_INTEGER;
+  }
+
+  return value;
 }
 },{}],"noNX":[function(require,module,exports) {
 "use strict";
@@ -1032,4 +1040,4 @@ Object.assign(window, {
   getCLS: _webVitals.getCLS
 });
 },{"web-vitals":"Qvvn","../src/index.js":"uBxZ"}]},{},["mpVp"], null)
-//# sourceMappingURL=script.e60a9e43.js.map
+//# sourceMappingURL=script.34c70b01.js.map
