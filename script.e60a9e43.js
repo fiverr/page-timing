@@ -582,7 +582,22 @@ function dom() {
     };
   }
 }
-},{"../number":"yLhy"}],"I8z3":[function(require,module,exports) {
+},{"../number":"yLhy"}],"bl8m":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.elapsed = void 0;
+
+var elapsed = function elapsed() {
+  return {
+    page_time_elapsed: window.performance.now()
+  };
+};
+
+exports.elapsed = elapsed;
+},{}],"I8z3":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -788,15 +803,17 @@ var _display = require("../display");
 
 var _dom = require("../dom");
 
+var _elapsed = require("../elapsed");
+
 /**
  * @returns {object}
  */
 var all = function all() {
-  return Object.assign({}, (0, _navigation.navigation)(), (0, _paint.paint)(), (0, _assets.assets)(), (0, _connection.connection)(), (0, _memory.memory)(), (0, _display.display)(), (0, _dom.dom)());
+  return Object.assign({}, (0, _navigation.navigation)(), (0, _paint.paint)(), (0, _assets.assets)(), (0, _connection.connection)(), (0, _memory.memory)(), (0, _display.display)(), (0, _dom.dom)(), (0, _elapsed.elapsed)());
 };
 
 exports.all = all;
-},{"../navigation":"iTLC","../paint":"Vd3j","../assets":"noNX","../connection":"PKRT","../memory":"sAwE","../display":"PWnK","../dom":"aHI8"}],"eJ9r":[function(require,module,exports) {
+},{"../navigation":"iTLC","../paint":"Vd3j","../assets":"noNX","../connection":"PKRT","../memory":"sAwE","../display":"PWnK","../dom":"aHI8","../elapsed":"bl8m"}],"eJ9r":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -935,6 +952,12 @@ Object.defineProperty(exports, "dom", {
     return _dom.dom;
   }
 });
+Object.defineProperty(exports, "elapsed", {
+  enumerable: true,
+  get: function () {
+    return _elapsed.elapsed;
+  }
+});
 Object.defineProperty(exports, "memory", {
   enumerable: true,
   get: function () {
@@ -980,6 +1003,8 @@ var _display = require("./display");
 
 var _dom = require("./dom");
 
+var _elapsed = require("./elapsed");
+
 var _memory = require("./memory");
 
 var _navigation = require("./navigation");
@@ -991,7 +1016,7 @@ var _all = require("./all");
 var _fps = require("./fps");
 
 var _measure = require("./measure");
-},{"./assets":"noNX","./connection":"PKRT","./display":"PWnK","./dom":"aHI8","./memory":"sAwE","./navigation":"iTLC","./paint":"Vd3j","./all":"iXFF","./fps":"eJ9r","./measure":"XxLS"}],"mpVp":[function(require,module,exports) {
+},{"./assets":"noNX","./connection":"PKRT","./display":"PWnK","./dom":"aHI8","./elapsed":"bl8m","./memory":"sAwE","./navigation":"iTLC","./paint":"Vd3j","./all":"iXFF","./fps":"eJ9r","./measure":"XxLS"}],"mpVp":[function(require,module,exports) {
 "use strict";
 
 var _webVitals = require("web-vitals");
@@ -1007,4 +1032,4 @@ Object.assign(window, {
   getCLS: _webVitals.getCLS
 });
 },{"web-vitals":"Qvvn","../src/index.js":"uBxZ"}]},{},["mpVp"], null)
-//# sourceMappingURL=script.95e614c1.js.map
+//# sourceMappingURL=script.e60a9e43.js.map
