@@ -5,6 +5,7 @@ import { connection } from '../connection';
 import { memory } from '../memory';
 import { display } from '../display';
 import { dom } from '../dom';
+import { elapsed } from '../elapsed';
 
 /**
  * @returns {object}
@@ -17,5 +18,6 @@ export const all = () => Object.assign(
     connection(),
     memory(),
     display(),
-    dom()
+    dom(),
+    elapsed()
 );
