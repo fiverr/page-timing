@@ -15,6 +15,7 @@ const METRICS = [
     'domContentLoadedEventStart',
     'domInteractive',
     'domLoading',
+    'duration',
     'encodedBodySize',
     'fetchStart',
     'loadEventEnd',
@@ -28,7 +29,8 @@ const METRICS = [
     'secureConnectionStart',
     'transferSize',
     'unloadEventEnd',
-    'unloadEventStart'
+    'unloadEventStart',
+    'workerStart'
 ];
 
 /**

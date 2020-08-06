@@ -1,6 +1,24 @@
 import { connection } from '.';
 
+const { getEntriesByType } = window.performance;
+
 describe('connection', () => {
+    afterEach(() => {
+        window.performance.getEntriesByType = getEntriesByType;
+    });
+    it('should find navigation timing', () => {
+        const { navigation_type } = connection();
+
+        expect(navigation_type).to.equal('navigate');
+    });
+    it('should find navigation on legacy object', () => {
+        window.performance.getEntriesByType = () => [];
+        expect(performance.getEntriesByType('navigation')).to.have.lengthOf(0);
+        const { navigation_type } = connection();
+
+        expect(navigation_type).to.equal('navigate');
+    });
+
     it('should expose supported metrics', () => {
         const {
             connection_type,

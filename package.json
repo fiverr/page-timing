@@ -1,6 +1,6 @@
 {
   "name": "page-timing",
-  "version": "2.1.1",
+  "version": "2.2.0",
   "description": "⏱ Collect and measure browser performance metrics",
   "keywords": [
     "browser",
@@ -46,7 +46,7 @@
     "karma-mocha-reporter": "^2.2.5",
     "karma-webpack": "^4.0.2",
     "mocha": "^8.0.1",
-    "web-vitals": "^0.2.3",
+    "web-vitals": "^0.2.4",
     "webpack": "^4.43.0"
   }
 }
