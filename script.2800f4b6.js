@@ -160,7 +160,7 @@ var t,
   r = !t.persisted;
 },
     u = function () {
-  addEventListener("pagehide", s), addEventListener("unload", function () {});
+  addEventListener("pagehide", s), addEventListener("beforeunload", function () {});
 },
     c = function (t) {
   var n = arguments.length > 1 && void 0 !== arguments[1] && arguments[1];
@@ -215,7 +215,7 @@ var t,
   });
   o && (n = l(t, e, o));
 },
-    m = function (t) {
+    f = function (t) {
   var n = i("FID"),
       e = d(),
       r = function (t) {
@@ -237,7 +237,7 @@ var t,
     }], s());
   });
 },
-    f = function () {
+    m = function () {
   return n || (n = new Promise(function (t) {
     return ["scroll", "keydown", "pointerdown"].map(function (n) {
       addEventListener(n, t, {
@@ -266,7 +266,7 @@ var t,
       r.isFinal || (u.takeRecords().map(s), r.isFinal = !0, n());
     };
 
-    f().then(p), c(p, !0);
+    m().then(p), c(p, !0);
   }
 },
     h = function (t) {
@@ -293,7 +293,7 @@ var t,
 
 exports.getTTFB = h;
 exports.getLCP = g;
-exports.getFID = m;
+exports.getFID = f;
 exports.getFCP = v;
 exports.getCLS = p;
 },{}],"QiGE":[function(require,module,exports) {
@@ -497,31 +497,64 @@ exports.connection = connection;
 
 var _number = require("../number");
 
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+/**
+ * Optional values of legacy navigation types
+ * 0: TYPE_NAVIGATE
+ * 1: TYPE_RELOAD
+ * 2: TYPE_BACK_FORWARD
+ * 255: TYPE_RESERVED
+ */
+var LEGACY_NAVIGATION_TYPES = ['navigate', 'reload', 'back_forward'];
 /**
  * @see [NetworkInformation](https://developer.mozilla.org/en-US/docs/Web/API/NetworkInformation)
  * @returns {object}
  */
+
 function connection() {
   var _ref = window.navigator || {},
       connection = _ref.connection;
 
-  if (!connection) {
-    return {};
+  var result = {};
+
+  try {
+    var _performance$getEntri = performance.getEntriesByType('navigation'),
+        _performance$getEntri2 = _slicedToArray(_performance$getEntri, 1),
+        _performance$getEntri3 = _performance$getEntri2[0],
+        navigation = _performance$getEntri3 === void 0 ? performance.navigation : _performance$getEntri3;
+
+    result.navigation_type = typeof navigation.type === 'number' ? LEGACY_NAVIGATION_TYPES[navigation.type] : navigation.type;
+  } catch (error) {// ignore
   }
 
-  return {
-    connection_type: connection.type,
-    // bluetooth, cellular, ethernet, none, wifi, wimax, other, unknown
-    effective_bandwidth: (0, _number.number)(connection.downlink),
-    // MBsS
-    effective_connection_type: connection.effectiveType,
-    // slow-2g, 2g, 3g, 4g
-    effective_max_bandwidth: (0, _number.number)(connection.downlinkMax),
-    // MBsS
-    reduced_data_usage: connection.saveData,
-    // boolean
-    round_trip_time: (0, _number.number)(connection.rtt)
-  };
+  if (connection) {
+    Object.assign(result, {
+      connection_type: connection.type,
+      // bluetooth, cellular, ethernet, none, wifi, wimax, other, unknown
+      effective_bandwidth: (0, _number.number)(connection.downlink),
+      // MBsS
+      effective_connection_type: connection.effectiveType,
+      // slow-2g, 2g, 3g, 4g
+      effective_max_bandwidth: (0, _number.number)(connection.downlinkMax),
+      // MBsS
+      reduced_data_usage: connection.saveData,
+      // boolean
+      round_trip_time: (0, _number.number)(connection.rtt)
+    });
+  }
+
+  return result;
 }
 },{"../number":"yLhy"}],"PWnK":[function(require,module,exports) {
 "use strict";
@@ -697,7 +730,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 /**
  * @type {string[]}
  */
-var METRICS = ['connectEnd', 'connectStart', 'decodedBodySize', 'domainLookupEnd', 'domainLookupStart', 'domComplete', 'domContentLoadedEventEnd', 'domContentLoadedEventStart', 'domInteractive', 'domLoading', 'encodedBodySize', 'fetchStart', 'loadEventEnd', 'loadEventStart', 'navigationStart', 'redirectEnd', 'redirectStart', 'requestStart', 'responseEnd', 'responseStart', 'secureConnectionStart', 'transferSize', 'unloadEventEnd', 'unloadEventStart'];
+var METRICS = ['connectEnd', 'connectStart', 'decodedBodySize', 'domainLookupEnd', 'domainLookupStart', 'domComplete', 'domContentLoadedEventEnd', 'domContentLoadedEventStart', 'domInteractive', 'domLoading', 'duration', 'encodedBodySize', 'fetchStart', 'loadEventEnd', 'loadEventStart', 'navigationStart', 'redirectEnd', 'redirectStart', 'requestStart', 'responseEnd', 'responseStart', 'secureConnectionStart', 'transferSize', 'unloadEventEnd', 'unloadEventStart', 'workerStart'];
 /**
  * @returns {object}
  */
@@ -1040,4 +1073,4 @@ Object.assign(window, {
   getCLS: _webVitals.getCLS
 });
 },{"web-vitals":"Qvvn","../src/index.js":"uBxZ"}]},{},["mpVp"], null)
-//# sourceMappingURL=script.34c70b01.js.map
+//# sourceMappingURL=script.2800f4b6.js.map
