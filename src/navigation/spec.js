@@ -16,6 +16,7 @@ describe('navigation', () => {
         'dom_content_loaded_event_end',
         'dom_content_loaded_event_start',
         'dom_interactive',
+        'duration',
         'encoded_body_size',
         'fetch_start',
         'load_event_end',
@@ -28,7 +29,8 @@ describe('navigation', () => {
         'secure_connection_start',
         'transfer_size',
         'unload_event_end',
-        'unload_event_start'
+        'unload_event_start',
+        'worker_start'
     ].forEach(
         (event) => it(
             `${event} == number`,

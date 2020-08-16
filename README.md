@@ -51,6 +51,7 @@ window.addEventListener(
 | **navigation** | `fetch_start` | _number_ | Ready to fetch the document
 | **navigation** | `domain_lookup_start` | _number_ |
 | **navigation** | `domain_lookup_end` | _number_ |
+| **navigation** | `duration` | _number_ | Difference between responseEnd and startTime
 | **navigation** | `connect_start` | _number_ | Sent request to open a connection
 | **navigation** | `connect_end` | _number_ |
 | **navigation** | `secure_connection_start` | _number_ | Secure connection handshake
@@ -67,6 +68,7 @@ window.addEventListener(
 | **navigation** | `transfer_size` | _number_ | Size (octets) of response headers and payload body
 | **navigation** | `encoded_body_size` | _number_ | Size (octets) of _payload_ body
 | **navigation** | `decoded_body_size` | _number_ | Size (octets) of _message_ body
+| **navigation** | `worker_start` | _number_ | Time until service worker ran
 | **paint** | `first_paint` | _number_ | User agent first rendered after navigation
 | **paint** | `first_contentful_paint` | _number_ | Document contains at least one element that is paintable and contentful†
 | **assets** | `final_asset_javascript_count` | _number_ | Total **number** of Javascript resources
@@ -87,6 +89,7 @@ window.addEventListener(
 | **connection** | `effective_max_bandwidth` | _number_ | Mbps
 | **connection** | `reduced_data_usage` | _boolean_ | Vendor's "Data Saver" feature enables
 | **connection** | `round_trip_time` | _number_ | Estimated effective round-trip in ms
+| **connection** | `navigation_type` | _string_ | [navigate, reload, back_forward, prerender](https://w3c.github.io/navigation-timing/#dom-performancenavigationtiming-type)
 | **memory** | `js_heap_size_limit` | _number_ | Maximum bytes available for JS heap
 | **memory** | `total_js_heap_size` | _number_ | Total allocated bytes for JS heap
 | **memory** | `used_js_heap_size` | _number_ | Currently active bytes of JS heap
