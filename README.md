@@ -28,82 +28,86 @@ window.addEventListener(
 
 ## API endpoints
 
-- `navigation`: [Navigation Timing](https://www.w3.org/TR/navigation-timing/#sec-navigation-timing-interface) [Illustration 🎨](#illustration-of-navigation-events)
-- `paint`: [Paint Timing](https://w3c.github.io/paint-timing/#sec-PerformancePaintTiming)
-- `assets`: Information about page resources when this function is called
-- `connection`: [Network Information](https://developer.mozilla.org/en-US/docs/Web/API/NetworkInformation)
-- `memory`: [Memory API information](https://developer.mozilla.org/en-US/docs/Web/API/Performance/memory)
-- `display`: Screen and document information
-- `dom`: Calculated metrics from the document object
-- `elapsed`: Time when the measurements were taken
-- `all`: A compound object containing all of the above
-- [`measure`](#measure): A helper function: Add measure entries to [navigation timing API](https://www.w3.org/TR/navigation-timing/)
+- **navigation**: [Navigation Timing](https://www.w3.org/TR/navigation-timing/#sec-navigation-timing-interface) [Illustration 🎨](#illustration-of-navigation-events)
+- **paint**: [Paint Timing](https://w3c.github.io/paint-timing/#sec-PerformancePaintTiming)
+- **assets**: Information about page resources when this function is called
+- **connection**: [Network Information](https://developer.mozilla.org/en-US/docs/Web/API/NetworkInformation)
+- **memory**: [Memory API information](https://developer.mozilla.org/en-US/docs/Web/API/Performance/memory)
+- **display**: Screen and document information
+- **dom**: Calculated metrics from the document object
+- **elapsed**: Time when the measurements were taken
+- **all**: A compound object containing all of the above
+- [**measure**](#measure): A helper function: Add measure entries to [navigation timing API](https://www.w3.org/TR/navigation-timing/)
 
 
 ## Metrics
-| Group | Name | Type | Meaning
+| Name | Meaning | Group | Type
 | - | - | - | -
-| **navigation** | `navigation_start` | _number_ | Termination of previous document upon navigating
-| **navigation** | `unload_event_start` | _number_ | Previous document unload
-| **navigation** | `unload_event_end` | _number_ |
-| **navigation** | `redirect_start` | _number_ | Redirect from previous document
-| **navigation** | `redirect_end` | _number_ |
-| **navigation** | `fetch_start` | _number_ | Ready to fetch the document
-| **navigation** | `domain_lookup_start` | _number_ |
-| **navigation** | `domain_lookup_end` | _number_ |
-| **navigation** | `duration` | _number_ | Difference between responseEnd and startTime
-| **navigation** | `connect_start` | _number_ | Sent request to open a connection
-| **navigation** | `connect_end` | _number_ |
-| **navigation** | `secure_connection_start` | _number_ | Secure connection handshake
-| **navigation** | `request_start` | _number_ | Request the document
-| **navigation** | `response_start` | _number_ | Received the first byte of the response
-| **navigation** | `response_end` | _number_ | Received the last byte of the response
-| **navigation** | `dom_loading` | _number_ | Parser started work
-| **navigation** | `dom_interactive` | _number_ | Parser finished work on main document. Changed document readyState to "interactive"
-| **navigation** | `dom_content_loaded_event_start` | _number_ | Executed required scripts after parsing the document
-| **navigation** | `dom_content_loaded_event_end` | _number_ |
-| **navigation** | `dom_complete` | _number_ | Changed document readyState to "complete"
-| **navigation** | `load_event_start` | _number_ | Document fires "load" event
-| **navigation** | `load_event_end` | _number_ |
-| **navigation** | `transfer_size` | _number_ | Size (octets) of response headers and payload body
-| **navigation** | `encoded_body_size` | _number_ | Size (octets) of _payload_ body
-| **navigation** | `decoded_body_size` | _number_ | Size (octets) of _message_ body
-| **navigation** | `worker_start` | _number_ | Time until service worker ran
-| **paint** | `first_paint` | _number_ | User agent first rendered after navigation
-| **paint** | `first_contentful_paint` | _number_ | Document contains at least one element that is paintable and contentful†
-| **assets** | `final_asset_javascript_count` | _number_ | Total **number** of Javascript resources
-| **assets** | `final_asset_javascript_load` | _number_ | Loading **time spent** on Javascript resources
-| **assets** | `final_asset_javascript_size` | _number_ | Total **size** of Javascript resources
-| **assets** | `final_asset_stylesheets_count` | _number_ | Total **number** of CSS resources
-| **assets** | `final_asset_stylesheets_load` | _number_ | Loading **time spent** on CSS resources
-| **assets** | `final_asset_stylesheets_size` | _number_ | Total **size** of CSS resources
-| **assets** | `final_asset_images_count` | _number_ | Total **number** of image resources
-| **assets** | `final_asset_images_load` | _number_ | Loading **time spent** on image resources
-| **assets** | `final_asset_images_size` | _number_ | Total **size** of image resources
-| **assets** | `final_asset_other_count` | _number_ | Total **number** of other resources
-| **assets** | `final_asset_other_load` | _number_ | Loading **time spent** on other resources
-| **assets** | `final_asset_other_size` | _number_ | Total **size** of other resources
-| **connection** | `connection_type` | _string_ | bluetooth, cellular, ethernet, none, wifi, wimax, other, unknown
-| **connection** | `effective_bandwidth` | _number_ | Mbps
-| **connection** | `effective_connection_type` | _string_ | slow-2g, 2g, 3g, 4g
-| **connection** | `effective_max_bandwidth` | _number_ | Mbps
-| **connection** | `reduced_data_usage` | _boolean_ | Vendor's "Data Saver" feature enables
-| **connection** | `round_trip_time` | _number_ | Estimated effective round-trip in ms
-| **connection** | `navigation_type` | _string_ | [navigate, reload, back_forward, prerender](https://w3c.github.io/navigation-timing/#dom-performancenavigationtiming-type)
-| **memory** | `js_heap_size_limit` | _number_ | Maximum bytes available for JS heap
-| **memory** | `total_js_heap_size` | _number_ | Total allocated bytes for JS heap
-| **memory** | `used_js_heap_size` | _number_ | Currently active bytes of JS heap
-| **display** | `window_inner_height` | _number_ | Height of the window's layout viewport
-| **display** | `window_inner_width` | _number_ | Width of the window's layout viewport
-| **display** | `screen_color_depth` | _number_ | Color depth of the screen
-| **display** | `screen_pixel_depth` | _number_ | Bit depth of the screen
-| **display** | `screen_orientation_type` | _string_ | landscape-primary, landscape-secondary, portrait-primary, portrait-secondary
-| **dom** | `final_dom_node_count` | _number_ | Total number of nodes under the document object
-| **dom** | `final_dom_nest_depth` | _number_ | Highest nesting depth of DOM element under the document
-| **dom** | `final_html_size` | _number_ | Character count of the HTML document
-| **elapsed** | `page_time_elapsed` | _number_ | milliseconds elapsed since the time origin
+| navigation_start | Termination of previous document upon navigating | **navigation** | _number_
+| unload_event_start | Previous document unload | **navigation** | _number_
+| unload_event_end | | **navigation** | _number_
+| redirect_start | Redirect from previous document | **navigation** | _number_
+| redirect_end | | **navigation** | _number_
+| fetch_start | Ready to fetch the document | **navigation** | _number_
+| domain_lookup_start | | **navigation** | _number_
+| domain_lookup_end | | **navigation** | _number_
+| duration | Difference between responseEnd and startTime | **navigation** | _number_
+| connect_start | Sent request to open a connection | **navigation** | _number_
+| connect_end | | **navigation** | _number_
+| secure_connection_start | Secure connection handshake | **navigation** | _number_
+| request_start | Request the document | **navigation** | _number_
+| response_start | Received the first byte of the response | **navigation** | _number_
+| response_end | Received the last byte of the response | **navigation** | _number_
+| dom_loading | Parser started work | **navigation** | _number_
+| dom_interactive | Parser finished work on main document. Changed document readyState to "interactive" | **navigation** | _number_
+| dom_content_loaded_event_start | Executed required scripts after parsing the document | **navigation** | _number_
+| dom_content_loaded_event_end | | **navigation** | _number_
+| dom_complete | Changed document readyState to "complete" | **navigation** | _number_
+| load_event_start | Document fires "load" event | **navigation** | _number_
+| load_event_end | | **navigation** | _number_
+| transfer_size | Size (octets) of response headers and payload body | **navigation** | _number_
+| encoded_body_size | Size (octets) of _payload_ body | **navigation** | _number_
+| decoded_body_size | Size (octets) of _message_ body | **navigation** | _number_
+| worker_start | Time until service worker ran | **navigation** | _number_
+| first_paint | User agent first rendered after navigation | **paint** | _number_
+| first_contentful_paint | Document contains at least one element that is paintable and [contentful †](#user-content-contentful) | **paint** | _number_
+| final_asset_javascript_count | Total **number** of Javascript resources | **assets** | _number_
+| final_asset_javascript_load | Loading **time spent** on Javascript resources | **assets** | _number_
+| final_asset_javascript_size | Total **size** of Javascript resources | **assets** | _number_
+| final_asset_stylesheets_count | Total **number** of CSS resources | **assets** | _number_
+| final_asset_stylesheets_load | Loading **time spent** on CSS resources | **assets** | _number_
+| final_asset_stylesheets_size | Total **size** of CSS resources | **assets** | _number_
+| final_asset_images_count | Total **number** of image resources | **assets** | _number_
+| final_asset_images_load | Loading **time spent** on image resources | **assets** | _number_
+| final_asset_images_size | Total **size** of image resources | **assets** | _number_
+| final_asset_other_count | Total **number** of other resources | **assets** | _number_
+| final_asset_other_load | Loading **time spent** on other resources | **assets** | _number_
+| final_asset_other_size | Total **size** of other resources | **assets** | _number_
+| connection_type | bluetooth, cellular, ethernet, none, wifi, wimax, other, unknown | **connection** | _string_
+| effective_bandwidth | Mbps | **connection** | _number_
+| effective_connection_type | slow-2g, 2g, 3g, 4g | **connection** | _string_
+| effective_max_bandwidth | Mbps | **connection** | _number_
+| reduced_data_usage | Vendor's "Data Saver" feature enables | **connection** | _boolean_
+| round_trip_time | Estimated effective round-trip in ms | **connection** | _number_
+| navigation_type | [navigate, reload, back_forward, prerender](https://w3c.github.io/navigation-timing/#dom-performancenavigationtiming-type) | **connection** | _string_
+| js_heap_size_limit | Maximum bytes available for JS heap | **memory** | _number_
+| total_js_heap_size | Total allocated bytes for JS heap | **memory** | _number_
+| used_js_heap_size | Currently active bytes of JS heap | **memory** | _number_
+| window_inner_height | Height of the window's layout viewport | **display** | _number_
+| window_inner_width | Width of the window's layout viewport | **display** | _number_
+| screen_color_depth | Color depth of the screen | **display** | _number_
+| screen_pixel_depth | Bit depth of the screen | **display** | _number_
+| screen_orientation_type | landscape-primary, landscape-secondary, portrait-primary, portrait-secondary | **display** | _string_
+| final_dom_node_count | Total number of nodes under the document object | **dom** | _number_
+| final_dom_nest_depth | Highest nesting depth of DOM element under the document | **dom** | _number_
+| final_html_size | Character count of the HTML document | **dom** | _number_
+| page_time_elapsed | milliseconds elapsed since the time origin | **elapsed** | _number_
+
+<a name="contentful">
 
 > † **contentful** element: A visible element which contains non empty text, media content or input.
+
+</a>
 
 ## More functions
 ### `fps`
@@ -153,7 +157,7 @@ const { duration } = performance.getEntriesByName('my-function');
 ## Bonus
 Also send [web vitals](https://web.dev/vitals/), a simple example
 ```js
-import { all } from 'page-timing';
+import { all, connection } from 'page-timing';
 import { getLCP, getFID, getCLS } from 'web-vitals';
 
 window.addEventListener(
@@ -169,7 +173,10 @@ window.addEventListener(
             [getCLS, 'comulative_layout_shift'],
         ].forEach(
             ([ fn, name ]) => fn(
-                ({ value }) => send({ [name]: value })
+                ({ value }) => send({
+                    [name]: value,
+                    ...connection() // Some connection info
+                })
             )
         );
     }
