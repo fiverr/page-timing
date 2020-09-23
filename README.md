@@ -71,6 +71,7 @@ window.addEventListener(
 | worker_start | Time until service worker ran | **navigation** | _number_
 | first_paint | User agent first rendered after navigation | **paint** | _number_
 | first_contentful_paint | Document contains at least one element that is paintable and [contentful †](#user-content-contentful) | **paint** | _number_
+| first_image_paint | TBD | **paint** | _number_
 | final_asset_javascript_count | Total **number** of Javascript resources | **assets** | _number_
 | final_asset_javascript_load | Loading **time spent** on Javascript resources | **assets** | _number_
 | final_asset_javascript_size | Total **size** of Javascript resources | **assets** | _number_
