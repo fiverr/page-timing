@@ -12,12 +12,28 @@ describe('elapsed', () => {
         expect(page_time_elapsed).to.be.at.least(50);
     });
     [
-        null,
+        4,
         0,
+        -10,
+        1e3
     ].forEach(
-        (item) => it('should return "undefined" if falsy', () => {
-            window.performance.now = () => item;
+        (value) => it('should return the result of "performance.now" function', () => {
+            window.performance.now = () => value;
             const { page_time_elapsed } = elapsed();
+            expect(page_time_elapsed).to.equal(value);
+        })
+    );
+    [
+        null,
+        '4',
+        Infinity,
+        NaN
+    ].forEach(
+        (value) => it('should be undefined if not a finite number', () => {
+            window.performance.now = () => value;
+            const result = elapsed();
+            expect(result).to.not.have.key('page_time_elapsed');
+            const { page_time_elapsed } = result;
             expect(page_time_elapsed).to.equal(undefined);
         })
     );
