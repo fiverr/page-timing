@@ -5,4 +5,4 @@ export function elapsed() {
         ? { page_time_elapsed }
         : {}
     ;
-};
+}
