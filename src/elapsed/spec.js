@@ -1,4 +1,4 @@
-import { elapsed } from '.';
+import { elapsed } from './index.js';
 
 const { now } = window.performance;
 

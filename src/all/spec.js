@@ -1,67 +1,33 @@
-import { purge } from '../../spec-helpers';
-
-let all;
-const navigation = { navigation: Symbol() };
-const paint = { paint: Symbol() };
-const assets = { assets: Symbol() };
-const connection = { connection: Symbol() };
-const memory = { memory: Symbol() };
-const display = { display: Symbol() };
-const dom = { dom: Symbol() };
-const elapsed = { elapsed: Symbol() };
+import { navigation } from '../navigation/index.js';
+import { paint } from '../paint/index.js';
+import { assets } from '../assets/index.js';
+import { connection } from '../connection/index.js';
+import { memory } from '../memory/index.js';
+import { display } from '../display/index.js';
+import { dom } from '../dom/index.js';
+import { elapsed } from '../elapsed/index.js';
+import { all } from './index.js';
 
 describe('all', () => {
-    before(() => {
-        Object.entries({
-            navigation,
-            paint,
-            assets,
-            connection,
-            memory,
-            display,
-            dom,
-            elapsed
-        }).forEach(
-            ([key, value]) => {
-                require(`../${key}`);
-                require.cache[require.resolve(`../${key}`)].exports = {
-                    [key]: () => value
-                };
-            }
-        );
-
-        all = require('.').all;
-    });
-    after(() => {
-        purge();
-    });
     it('should collect information from all modules', () => {
-        expect(
-            all()
-        ).to.deep.equal(
-            {
-                ...navigation,
-                ...paint,
-                ...assets,
-                ...connection,
-                ...memory,
-                ...display,
-                ...dom,
-                ...elapsed
-            }
-        );
-    });
+        const result = all();
+        const metrics = {
+            ...navigation(),
+            ...paint(),
+            ...assets(),
+            ...connection(),
+            ...memory(),
+            ...display(),
+            ...dom(),
+            ...elapsed()
+        };
 
-    it('should create a new object', () => {
-        [
-            navigation,
-            paint,
-            assets,
-            connection,
-            memory,
-            display,
-            dom,
-            elapsed
-        ].forEach((item) => expect(all()).not.to.equal(item));
+        expect(result.page_time_elapsed).to.be.a(typeof metrics.page_time_elapsed);
+        expect(result.page_time_elapsed).to.be.a('number');
+
+        delete result.page_time_elapsed;
+        delete metrics.page_time_elapsed;
+
+        expect(result).to.deep.equal(metrics);
     });
 });

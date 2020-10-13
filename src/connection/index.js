@@ -1,4 +1,4 @@
-import { number } from '../number';
+import { number } from '../number/index.js';
 
 /**
  * Optional values of legacy navigation types

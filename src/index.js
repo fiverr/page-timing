@@ -1,12 +1,12 @@
-export { assets } from './assets';
-export { connection } from './connection';
-export { display } from './display';
-export { dom } from './dom';
-export { elapsed } from './elapsed';
-export { memory } from './memory';
-export { navigation } from './navigation';
-export { paint } from './paint';
+export { assets } from './assets/index.js';
+export { connection } from './connection/index.js';
+export { display } from './display/index.js';
+export { dom } from './dom/index.js';
+export { elapsed } from './elapsed/index.js';
+export { memory } from './memory/index.js';
+export { navigation } from './navigation/index.js';
+export { paint } from './paint/index.js';
 
-export { all } from './all';
-export { fps } from './fps';
-export { measure } from './measure';
+export { all } from './all/index.js';
+export { fps } from './fps/index.js';
+export { measure } from './measure/index.js';

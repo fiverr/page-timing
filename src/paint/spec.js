@@ -1,5 +1,5 @@
-import { getEntriesByTypeMock } from '../../spec-helpers';
-import { paint } from '.';
+import { getEntriesByTypeMock } from '../../spec-helpers/index.js';
+import { paint } from './index.js';
 
 const { getEntriesByType } = window.performance;
 

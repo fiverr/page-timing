@@ -1,4 +1,4 @@
-import { fps } from '.';
+import { fps } from './index.js';
 
 const { requestAnimationFrame } = window;
 
@@ -6,7 +6,7 @@ describe('fps', () => {
     afterEach(() => {
         window.requestAnimationFrame = requestAnimationFrame;
     });
-    it('should measure browser FTP', async() => {
+    it('should measure browser FPS', async() => {
         const result = await fps();
         expect(result).to.be.at.least(29);
         expect(result).to.be.at.most(62);

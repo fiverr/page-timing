@@ -1,4 +1,4 @@
-import { number } from '.';
+import { number } from './index.js';
 
 const REALLY_BIG_NUMBER = new Array(20).fill(1000).reduce((a, b) => a * b);
 

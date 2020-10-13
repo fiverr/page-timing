@@ -1,4 +1,4 @@
-import { connection } from '.';
+import { connection } from './index.js';
 
 const { getEntriesByType } = window.performance;
 

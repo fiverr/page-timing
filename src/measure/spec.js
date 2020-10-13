@@ -1,6 +1,6 @@
 import sleep from '@lets/sleep';
 import wait from '@lets/wait';
-import { measure } from '.';
+import { measure } from './index.js';
 
 describe('measure', () => {
     beforeEach(() => {

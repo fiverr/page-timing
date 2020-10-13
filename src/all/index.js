@@ -1,11 +1,11 @@
-import { navigation } from '../navigation';
-import { paint } from '../paint';
-import { assets } from '../assets';
-import { connection } from '../connection';
-import { memory } from '../memory';
-import { display } from '../display';
-import { dom } from '../dom';
-import { elapsed } from '../elapsed';
+import { navigation } from '../navigation/index.js';
+import { paint } from '../paint/index.js';
+import { assets } from '../assets/index.js';
+import { connection } from '../connection/index.js';
+import { memory } from '../memory/index.js';
+import { display } from '../display/index.js';
+import { dom } from '../dom/index.js';
+import { elapsed } from '../elapsed/index.js';
 
 /**
  * @returns {object}

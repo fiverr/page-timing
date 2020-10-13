@@ -1,4 +1,4 @@
-import { navigation } from '.';
+import { navigation } from './index.js';
 
 let data;
 

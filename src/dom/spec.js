@@ -1,4 +1,4 @@
-import { dom } from '.';
+import { dom } from './index.js';
 
 let d;
 const { querySelector } = document;
