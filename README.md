@@ -156,10 +156,12 @@ const { duration } = performance.getEntriesByName('my-function');
 [![](https://www.w3.org/TR/navigation-timing/timing-overview.png)](https://www.w3.org/TR/navigation-timing/)
 
 ## Bonus
-Also send [web vitals](https://web.dev/vitals/), a simple example
+A simple example to add [web vitals](https://web.dev/vitals/) and [TTI](https://docs.google.com/document/d/1GGiI9-7KeY3TPqS3YT271upUVimo-XiL5mwWorDUD4c/preview)
+
 ```js
 import { all, connection } from 'page-timing';
 import { getLCP, getFID, getCLS } from 'web-vitals';
+import TTI from 'tti-polyfill';
 
 window.addEventListener(
     'load',
@@ -180,6 +182,13 @@ window.addEventListener(
                 })
             )
         );
+
+        TTI.getFirstConsistentlyInteractive().then(
+            (time_to_interactive) => send({
+                time_to_interactive,
+                ...connection() // Some connection info
+            })
+        ).catch(() => null)
     }
 );
 

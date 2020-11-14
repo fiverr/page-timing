@@ -62,6 +62,11 @@ td { padding: .2em 1em }
                     window.performance_information.frames_per_second = result;
                     print()
                 })
+
+                TTI.getFirstConsistentlyInteractive().then(result => {
+                    window.performance_information.time_to_interactive = result;
+                    print()
+                })
             }
         );
     </script>
