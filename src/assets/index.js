@@ -1,5 +1,5 @@
-import { getType } from '../get-type';
-import { number } from '../number';
+import { getType } from '../get-type/index.js';
+import { number } from '../number/index.js';
 
 const FINAL_ASSET_PREFIX = 'final_asset';
 

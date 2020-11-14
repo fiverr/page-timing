@@ -1,4 +1,4 @@
-import { display } from '.';
+import { display } from './index.js';
 
 describe('display', () => {
     [

@@ -1,4 +1,4 @@
-import { number } from '../number';
+import { number } from '../number/index.js';
 
 /**
  * getMaxNestLevel: Determine the largest DOM depth in the document or under a base element

@@ -1,4 +1,4 @@
-import { number } from '../number';
+import { number } from '../number/index.js';
 
 /**
  * @returns {object}

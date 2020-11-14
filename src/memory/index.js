@@ -1,5 +1,5 @@
-import { number } from '../number';
-import { snakeCase } from '../snake-case';
+import { number } from '../number/index.js';
+import { snakeCase } from '../snake-case/index.js';
 
 /**
  * @type {string[]}

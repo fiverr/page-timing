@@ -16,7 +16,7 @@ module.exports = (config) => {
             singleRun: !watch,
             autoWatch: watch,
             basePath: '',
-            frameworks: ['mocha'],
+            frameworks: ['mocha', 'webpack'],
             browsers,
             browserNoActivityTimeout,
             port: 9876, // This is the default. Change it if you have ports collisions

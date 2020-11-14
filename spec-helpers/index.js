@@ -1,4 +1,6 @@
-export const getEntriesByTypeMock = (type) => require('./fixture.json').filter(
+import fixture from './fixture.json';
+
+export const getEntriesByTypeMock = (type) => fixture.filter(
     ({ entryType }) => entryType === type
 );
 
@@ -13,9 +15,3 @@ export const onload = () => new Promise((resolve) => {
         return false;
     }
 });
-
-export const purge = () => Object.keys(require.cache).forEach(
-    (key) => {
-        delete require.cache[key];
-    }
-);
