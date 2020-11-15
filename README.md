@@ -158,6 +158,10 @@ const { duration } = performance.getEntriesByName('my-function');
 ## Bonus
 A simple example to add [web vitals](https://web.dev/vitals/) and [TTI](https://docs.google.com/document/d/1GGiI9-7KeY3TPqS3YT271upUVimo-XiL5mwWorDUD4c/preview)
 
+```bash
+npm i page-timing web-vitals tti-polyfill
+```
+
 ```js
 import { all, connection } from 'page-timing';
 import { getLCP, getFID, getCLS } from 'web-vitals';
