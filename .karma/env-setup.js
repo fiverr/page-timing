@@ -1,7 +1,12 @@
+const chai = require('chai');
+const chaiAsPromised = require('chai-as-promised');
+
 Object.assign(
     global,
-    require('chai')
+    chai
 );
+
+chai.use(chaiAsPromised);
 
 /**
  * empty the document element

@@ -2,9 +2,9 @@ import { memory } from './index.js';
 
 let data;
 
-describe('memory', () => {
-    before(() => {
-        data = memory();
+describe('memory', async() => {
+    before(async() => {
+        data = await memory();
     });
     [
         'js_heap_size_limit',

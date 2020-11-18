@@ -3,7 +3,7 @@ import { number } from '../number/index.js';
 /**
  * @returns {object}
  */
-export function display() {
+export async function display() {
     const result = {
         window_inner_height: number(window.innerHeight),
         window_inner_width: number(window.innerWidth)

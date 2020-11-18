@@ -3,8 +3,8 @@ import { navigation } from './index.js';
 let data;
 
 describe('navigation', () => {
-    before(() => {
-        data = navigation();
+    before(async() => {
+        data = await navigation();
     });
     [
         'connect_end',

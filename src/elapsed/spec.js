@@ -6,8 +6,8 @@ describe('elapsed', () => {
     afterEach(() => {
         window.performance.now = now;
     });
-    it('should returned the time elapsed since the time origin', () => {
-        const { page_time_elapsed } = elapsed();
+    it('should returned the time elapsed since the time origin', async() => {
+        const { page_time_elapsed } = await elapsed();
         expect(page_time_elapsed).to.be.a('number');
         expect(page_time_elapsed).to.be.at.least(50);
     });
@@ -17,9 +17,9 @@ describe('elapsed', () => {
         -10,
         1e3
     ].forEach(
-        (value) => it('should return the result of "performance.now" function', () => {
+        (value) => it('should return the result of "performance.now" function', async() => {
             window.performance.now = () => value;
-            const { page_time_elapsed } = elapsed();
+            const { page_time_elapsed } = await elapsed();
             expect(page_time_elapsed).to.equal(value);
         })
     );
@@ -29,9 +29,9 @@ describe('elapsed', () => {
         Infinity,
         NaN
     ].forEach(
-        (value) => it('should be undefined if not a finite number', () => {
+        (value) => it('should be undefined if not a finite number', async() => {
             window.performance.now = () => value;
-            const result = elapsed();
+            const result = await elapsed();
             expect(result).to.not.have.key('page_time_elapsed');
             const { page_time_elapsed } = result;
             expect(page_time_elapsed).to.equal(undefined);

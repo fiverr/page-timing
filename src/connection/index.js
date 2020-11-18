@@ -1,3 +1,4 @@
+import { getEntries } from '../getEntries/index.js';
 import { number } from '../number/index.js';
 
 /**
@@ -17,14 +18,14 @@ const LEGACY_NAVIGATION_TYPES = [
  * @see [NetworkInformation](https://developer.mozilla.org/en-US/docs/Web/API/NetworkInformation)
  * @returns {object}
  */
-export function connection() {
+export async function connection() {
     const { connection } = window.navigator || {};
     const result = {};
 
     try {
         const [
-            navigation = performance.navigation
-        ] = performance.getEntriesByType('navigation');
+            { navigation = performance.navigation } = {}
+        ] = await getEntries('navigation');
 
         result.navigation_type = typeof navigation.type === 'number'
             ? LEGACY_NAVIGATION_TYPES[navigation.type]

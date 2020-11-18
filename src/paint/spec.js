@@ -16,8 +16,8 @@ describe('paint', () => {
     ].forEach(
         (event) => it(
             event,
-            () => {
-                const data = paint();
+            async() => {
+                const data = await paint();
                 expect(data).to.have.property(event);
                 expect(data[event]).to.be.a('number');
             }

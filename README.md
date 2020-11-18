@@ -7,23 +7,22 @@
 ```js
 import { navigation, paint } from 'page-timing';
 
-window.addEventListener(
-    'load',
-    () => {
-        const metrics = {
-            ...paint(),
-            ...navigation()
-        };
+(async () => {
+    const results = await Promise.all([
+        paint(),
+        navigation()
+    ]);
 
-        fetch('/browser-performance-metrics', {
-          method: 'POST',
-          body: JSON.stringify({
+    const metrics = Object.assign(...results);
+
+    fetch('/browser-performance-metrics', {
+        method: 'POST',
+        body: JSON.stringify({
             page_name: 'my page',
             metrics
-          }),
-        });
-    }
-);
+        }),
+    });
+})();
 ```
 
 ## API endpoints
@@ -167,34 +166,33 @@ import { all, connection } from 'page-timing';
 import { getLCP, getFID, getCLS } from 'web-vitals';
 import TTI from 'tti-polyfill';
 
-window.addEventListener(
-    'load',
-    () => {
-        // Send metrics from browser performance API
-        send(all());
+(async () => {
+    const connectionInfo = await connection();
 
-        // Send web vitals to the same endpoint
-        [
-            [getLCP, 'largest_contentful_paint'],
-            [getFID, 'first_input_delay'],
-            [getCLS, 'comulative_layout_shift'],
-        ].forEach(
-            ([ fn, name ]) => fn(
-                ({ value }) => send({
-                    [name]: value,
-                    ...connection() // Some connection info
-                })
-            )
-        );
+    // Send metrics from browser performance API
+    send(await all());
 
-        TTI.getFirstConsistentlyInteractive().then(
-            (time_to_interactive) => send({
-                time_to_interactive,
-                ...connection() // Some connection info
+    // Send web vitals to the same endpoint
+    [
+        [getLCP, 'largest_contentful_paint'],
+        [getFID, 'first_input_delay'],
+        [getCLS, 'comulative_layout_shift'],
+    ].forEach(
+        ([ fn, name ]) => fn(
+            ({ value }) => send({
+                [name]: value,
+                ...connectionInfo // Some connection info
             })
-        ).catch(() => null)
-    }
-);
+        )
+    );
+
+    TTI.getFirstConsistentlyInteractive().then(
+        (time_to_interactive) => send({
+            time_to_interactive,
+            ...connectionInfo // Some connection info
+        })
+    ).catch(() => null)
+})();
 
 const send = metrics => fetch('/browser-performance-metrics', {
   method: 'POST',

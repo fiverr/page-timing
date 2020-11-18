@@ -10,8 +10,7 @@ import { elapsed } from '../elapsed/index.js';
 /**
  * @returns {object}
  */
-export const all = () => Object.assign(
-    {},
+export const all = async() => await Promise.all([
     navigation(),
     paint(),
     assets(),
@@ -20,4 +19,6 @@ export const all = () => Object.assign(
     display(),
     dom(),
     elapsed()
+]).then(
+    (results) => Object.assign({}, ...results)
 );

@@ -10,8 +10,8 @@ describe('dom', () => {
     ].forEach(
         (event) => it(
             `DOM metric ${event}`,
-            () => {
-                const data = dom();
+            async() => {
+                const data = await dom();
                 expect(data).to.have.property(event);
                 expect(data[event]).to.be.a('number');
             }
@@ -51,18 +51,18 @@ describe('dom', () => {
             expect(d.querySelector('body article p strong')).not.to.equal(null);
         });
 
-        it('Should return the total number of child DOM elements', () => {
-            const { final_dom_node_count } = dom();
+        it('Should return the total number of child DOM elements', async() => {
+            const { final_dom_node_count } = await dom();
             expect(final_dom_node_count).to.equal(18);
         });
 
-        it('Should return the depth of deepest DOM tree', () => {
-            const { final_dom_nest_depth } = dom();
+        it('Should return the depth of deepest DOM tree', async() => {
+            const { final_dom_nest_depth } = await dom();
             expect(final_dom_nest_depth).to.equal(5);
         });
 
-        it('Should return the character count of the HTML document', () => {
-            const { final_html_size } = dom();
+        it('Should return the character count of the HTML document', async() => {
+            const { final_html_size } = await dom();
             expect(final_html_size).to.equal(232);
         });
     });

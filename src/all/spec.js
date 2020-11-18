@@ -1,33 +1,48 @@
-import { navigation } from '../navigation/index.js';
-import { paint } from '../paint/index.js';
-import { assets } from '../assets/index.js';
-import { connection } from '../connection/index.js';
-import { memory } from '../memory/index.js';
-import { display } from '../display/index.js';
-import { dom } from '../dom/index.js';
-import { elapsed } from '../elapsed/index.js';
 import { all } from './index.js';
 
+const calls = [];
+
 describe('all', () => {
-    it('should collect information from all modules', () => {
-        const result = all();
-        const metrics = {
-            ...navigation(),
-            ...paint(),
-            ...assets(),
-            ...connection(),
-            ...memory(),
-            ...display(),
-            ...dom(),
-            ...elapsed()
+    before(() => {
+        const { all } = Promise;
+        Promise.all = (...args) => {
+            calls.push(args);
+            return all.apply(Promise, args);
         };
+    });
+    after(() => {
+        Promise.all = all;
+    });
+    it('should collect information from all modules', async() => {
+        all();
+        const [ [ functions ] ] = calls;
+        expect(functions).to.have.lengthOf(8);
 
-        expect(result.page_time_elapsed).to.be.a(typeof metrics.page_time_elapsed);
-        expect(result.page_time_elapsed).to.be.a('number');
+        const [
+            navigation,
+            paint,
+            assets,
+            connection,
+            memory,
+            display,
+            dom,
+            elapsed
+        ] = functions;
 
-        delete result.page_time_elapsed;
-        delete metrics.page_time_elapsed;
+        [
+            navigation,
+            paint,
+            assets,
+            connection,
+            memory,
+            display,
+            dom,
+            elapsed
+        ].forEach(
+            (item) => expect(item).to.be.an.instanceof(Promise)
+        );
 
-        expect(result).to.deep.equal(metrics);
+        const { page_time_elapsed } = await elapsed;
+        expect(page_time_elapsed).to.be.a('number');
     });
 });
