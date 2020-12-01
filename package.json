@@ -1,6 +1,6 @@
 {
   "name": "page-timing",
-  "version": "3.0.0-rc",
+  "version": "3.0.0",
   "description": "⏱ Collect and measure browser performance metrics",
   "keywords": [
     "browser",
