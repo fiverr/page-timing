@@ -19,8 +19,8 @@ describe('assets', () => {
     ].forEach(
         (event) => it(
             event,
-            () => {
-                const data = assets();
+            async() => {
+                const data = await assets();
                 expect(data).to.have.property(event);
                 expect(data[event]).to.be.a('number');
             }

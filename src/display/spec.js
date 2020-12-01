@@ -7,16 +7,16 @@ describe('display', () => {
     ].forEach(
         (event) => it(
             `Screen metric ${event}`,
-            () => {
-                const data = display();
+            async() => {
+                const data = await display();
                 expect(data).to.have.property(event);
                 expect(data[event]).to.be.a('number');
             }
         )
     );
 
-    it('Screen orientation', () => {
-        const data = display();
+    it('Screen orientation', async() => {
+        const data = await display();
         expect(data).to.have.property('screen_orientation_type');
         expect(data.screen_orientation_type).to.be.a('string');
     });

@@ -2,24 +2,16 @@ import { connection } from './index.js';
 
 const { getEntriesByType } = window.performance;
 
-describe('connection', () => {
+describe('connection', async() => {
     afterEach(() => {
         window.performance.getEntriesByType = getEntriesByType;
     });
-    it('should find navigation timing', () => {
-        const { navigation_type } = connection();
+    it('should find navigation timing', async() => {
+        const { navigation_type } = await connection();
 
         expect(navigation_type).to.equal('navigate');
     });
-    it('should find navigation on legacy object', () => {
-        window.performance.getEntriesByType = () => [];
-        expect(performance.getEntriesByType('navigation')).to.have.lengthOf(0);
-        const { navigation_type } = connection();
-
-        expect(navigation_type).to.equal('navigate');
-    });
-
-    it('should expose supported metrics', () => {
+    it('should expose supported metrics', async() => {
         const {
             connection_type,
             effective_bandwidth,
@@ -27,7 +19,7 @@ describe('connection', () => {
             effective_max_bandwidth,
             reduced_data_usage,
             round_trip_time
-        } = connection();
+        } = await connection();
 
         expect(connection_type).to.be.undefined; // Not yet exposed by Chrome
         expect(effective_bandwidth).to.be.a('number');

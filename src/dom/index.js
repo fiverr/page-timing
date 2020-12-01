@@ -15,7 +15,7 @@ function getMaxNestLevel(depth = 1) {
  * Get stats on a DOM tree safely
  * @returns {object}
  */
-export function dom() {
+export async function dom() {
     try {
         return {
             final_dom_node_count: number(document.querySelectorAll('*').length),

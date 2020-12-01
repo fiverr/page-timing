@@ -60,7 +60,7 @@ const initiators = {
  * @param {string} o.name
  * @returns {string} (images, javascript, stylesheets, other)
  */
-export function getType({ initiatorType, name }) {
+export async function getType({ initiatorType, name }) {
     if (Object.hasOwnProperty.call(initiators, initiatorType)) {
         return initiators[initiatorType];
     }

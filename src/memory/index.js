@@ -13,7 +13,7 @@ const METRICS = [
 /**
  * @returns {object}
  */
-export function memory() {
+export async function memory() {
     const { memory } = window.performance || {};
     if (!memory) {
         return {};

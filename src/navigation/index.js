@@ -1,3 +1,4 @@
+import { getEntries } from '../getEntries/index.js';
 import { number } from '../number/index.js';
 import { snakeCase } from '../snake-case/index.js';
 
@@ -36,26 +37,22 @@ const METRICS = [
 /**
  * @returns {object}
  */
-export function navigation() {
+export async function navigation() {
     const { performance } = window;
     if (!performance || !performance.getEntriesByType) {
         return {};
     }
 
-    const navigationEntries = performance.getEntriesByType('navigation');
+    const [ navigation ] = await getEntries('navigation');
 
-    // PerformanceNavigationTiming interface
-    if (navigationEntries.length) {
+    // console.log(entries.toJSON());
+
+    if (navigation) {
         return Object.assign(
-            {},
-            ...[].concat(
-                ...navigationEntries.map(
-                    (entry) => METRICS.filter(
-                        (metric) => !Number.isNaN(entry[metric])
-                    ).map(
-                        (metric) => ({ [snakeCase(metric)]: number(entry[metric]) })
-                    )
-                )
+            ...METRICS.filter(
+                (metric) => !Number.isNaN(navigation[metric])
+            ).map(
+                (metric) => ({ [snakeCase(metric)]: number(navigation[metric]) })
             )
         );
     }
@@ -67,7 +64,7 @@ export function navigation() {
     const start = performance.timeOrigin || timing.navigationStart;
     if (!start) { return {}; }
 
-    return METRICS.reduce(
+    const result = METRICS.reduce(
         (accumulator, metric) => {
             const value = timing[metric] - start;
             accumulator[snakeCase(metric)] = value < 0
@@ -79,4 +76,6 @@ export function navigation() {
         },
         {}
     );
+
+    return result;
 }
