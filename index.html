@@ -1,85 +1,33 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
-        <title>page-timing</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
-        <link rel="shortcut icon" href="https://www.fiverr.com/favicon.ico">
-        <link rel="stylesheet" href="https://code.jquery.com/ui/jquery-ui-git.css">
-        <style>* { font-family: monospace; }
+<!DOCTYPE html><html><head><title>page-timing</title><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1"><meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"><link rel="shortcut icon" href="https://www.fiverr.com/favicon.ico"><link rel="stylesheet" href="https://code.jquery.com/ui/jquery-ui-git.css"><style>* { font-family: monospace; }
+html { height: 100%; }
+body {
+  min-height: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin: 0;
+  padding: 1em;
+}
+h1 {
+  text-transform: capitalize;
+}
+section {
+  overflow: auto;
+}
 table {
-    border-collapse:
-    collapse; float: right;
-    margin: 1em 1em 4em;
-    border: 1px solid rgba(0, 0, 0, .1);
+  border-collapse:
+  collapse; float: right;
+  border: 1px solid rgba(0, 0, 0, .1);
 }
 tr:nth-child(even) { background: rgba(0, 0, 0, .05) }
 td:nth-child(1) { font-weight: bold; }
-td { padding: .2em 1em }</style>
-    </head>
-    <body>
-    <table><tr><td>Loading...</td></tr><td></td></table>
-    <h1>Page Timing <a href="https://www.npmjs.com/package/page-timing" rel="nofollow"><img src="https://img.shields.io/npm/v/page-timing.svg"></a> <a href="https://github.com/fiverr/page-timing" rel="nofollow"><img src="https://img.shields.io/badge/source--000000.svg?logo=github&style=social"></a> <a href="https://circleci.com/gh/fiverr/page-timing" rel="nofollow"><img src="https://circleci.com/gh/fiverr/page-timing.svg?style=svg"></a> <a href="https://bundlephobia.com/result?p=page-timing" rel="nofollow"><img src="https://badgen.net/bundlephobia/minzip/page-timing"></a></h1>
-    <p>⏱ Collect and measure browser performance metrics</p>
-
-    <p><img src="https://dummyimage.com/1000x700/ffeedd/000000.png" width="100" alt="alt text"></p>
-    <script>// Delay everything by 2 seconds
+td { padding: .2em 1em }</style></head><body><section><h1>page timing 3.0.0</h1><p><a href="https://www.npmjs.com/package/page-timing" rel="nofollow"><img src="https://img.shields.io/npm/v/page-timing.svg"></a><a href="https://github.com/fiverr/page-timing" rel="nofollow"><img src="https://img.shields.io/badge/source--000000.svg?logo=github&amp;style=social"></a><a href="https://circleci.com/gh/fiverr/page-timing" rel="nofollow"><img src="https://circleci.com/gh/fiverr/page-timing.svg?style=svg"></a><a href="https://bundlephobia.com/result?p=page-timing" rel="nofollow"><img src="https://badgen.net/bundlephobia/minzip/page-timing"></a></p><p>⏱ Collect and measure browser performance metrics</p><p><img src="https://dummyimage.com/1000x700/ffeedd/000000.png" width="100" alt="alt text"></p></section><table><tr><td>Loading...</td></tr></table><script>// Delay everything by 2 seconds
 var end = Date.now() + 2000;
 
 while (Date.now() < end) {
   /*...*/
-}</script>
-    <script src="script.2800f4b6.js"></script>
-    <script>function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
-window.performance_information = {};
-
-function print() {
-  document.querySelector('table').innerHTML = Object.entries(window.performance_information).map(function (_ref) {
-    var _ref2 = _slicedToArray(_ref, 2),
-        key = _ref2[0],
-        value = _ref2[1];
-
-    return "<tr><td>".concat(key, "</td><td>").concat(value, "</td></tr>");
-  }).join('');
-}
-
-window.addEventListener('load', function () {
-  Object.assign(window.performance_information, all());
-  print();
-  [[getLCP, 'largest_contentful_paint'], [getFID, 'first_input_delay'], [getCLS, 'comulative_layout_shift']].forEach(function (_ref3) {
-    var _ref4 = _slicedToArray(_ref3, 2),
-        fn = _ref4[0],
-        name = _ref4[1];
-
-    return fn(function (_ref5) {
-      var value = _ref5.value;
-      window.performance_information[name] = value;
-      print();
-    });
-  });
-  fps().then(function (result) {
-    window.performance_information.frames_per_second = result;
-    print();
-  });
-});</script>
-    <script async="">// Delay everything by 2 seconds
+}</script><script src="script.78b999aa.js"></script><script async="async">// Delay everything by 2 seconds
 var end = Date.now() + 2000;
 
 while (Date.now() < end) {
   /*...*/
-}</script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r118/three.min.js"></script>
-    </body>
-</html>
+}</script><script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r118/three.min.js"></script></body></html>

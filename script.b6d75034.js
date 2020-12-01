@@ -442,9 +442,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.assets = assets;
 
-var _getType = require("../get-type");
+var _index = require("../get-type/index.js");
 
-var _number = require("../number");
+var _index2 = require("../number/index.js");
 
 var FINAL_ASSET_PREFIX = 'final_asset';
 /**
@@ -458,7 +458,7 @@ function assets() {
 
   var metrics = {};
   window.performance.getEntriesByType('resource').forEach(function (entry) {
-    var type = (0, _getType.getType)(entry);
+    var type = (0, _index.getType)(entry);
     add(metrics, type, 'count', 1);
     add(metrics, type, 'load', entry.duration);
     add(metrics, type, 'size', entry.decodedBodySize);
@@ -485,9 +485,9 @@ function assets() {
 function add(accumulator, type, key, value) {
   var field = [FINAL_ASSET_PREFIX, type, key].join('_');
   accumulator[field] = accumulator[field] || 0;
-  accumulator[field] += (0, _number.number)(value) || 0;
+  accumulator[field] += (0, _index2.number)(value) || 0;
 }
-},{"../get-type":"QiGE","../number":"yLhy"}],"PKRT":[function(require,module,exports) {
+},{"../get-type/index.js":"QiGE","../number/index.js":"yLhy"}],"PKRT":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -495,17 +495,13 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.connection = connection;
 
-var _number = require("../number");
+var _index = require("../number/index.js");
 
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
 
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
 
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
@@ -542,21 +538,21 @@ function connection() {
     Object.assign(result, {
       connection_type: connection.type,
       // bluetooth, cellular, ethernet, none, wifi, wimax, other, unknown
-      effective_bandwidth: (0, _number.number)(connection.downlink),
+      effective_bandwidth: (0, _index.number)(connection.downlink),
       // MBsS
       effective_connection_type: connection.effectiveType,
       // slow-2g, 2g, 3g, 4g
-      effective_max_bandwidth: (0, _number.number)(connection.downlinkMax),
+      effective_max_bandwidth: (0, _index.number)(connection.downlinkMax),
       // MBsS
       reduced_data_usage: connection.saveData,
       // boolean
-      round_trip_time: (0, _number.number)(connection.rtt)
+      round_trip_time: (0, _index.number)(connection.rtt)
     });
   }
 
   return result;
 }
-},{"../number":"yLhy"}],"PWnK":[function(require,module,exports) {
+},{"../number/index.js":"yLhy"}],"PWnK":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -564,26 +560,26 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.display = display;
 
-var _number = require("../number");
+var _index = require("../number/index.js");
 
 /**
  * @returns {object}
  */
 function display() {
   var result = {
-    window_inner_height: (0, _number.number)(window.innerHeight),
-    window_inner_width: (0, _number.number)(window.innerWidth)
+    window_inner_height: (0, _index.number)(window.innerHeight),
+    window_inner_width: (0, _index.number)(window.innerWidth)
   };
   var _window = window,
       screen = _window.screen;
   screen && Object.assign(result, {
-    screen_color_depth: (0, _number.number)(screen.colorDepth),
-    screen_pixel_depth: (0, _number.number)(screen.pixelDepth),
+    screen_color_depth: (0, _index.number)(screen.colorDepth),
+    screen_pixel_depth: (0, _index.number)(screen.pixelDepth),
     screen_orientation_type: screen.orientation && screen.orientation.type
   });
   return result;
 }
-},{"../number":"yLhy"}],"aHI8":[function(require,module,exports) {
+},{"../number/index.js":"yLhy"}],"aHI8":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -591,7 +587,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.dom = dom;
 
-var _number = require("../number");
+var _index = require("../number/index.js");
 
 /**
  * getMaxNestLevel: Determine the largest DOM depth in the document or under a base element
@@ -611,9 +607,9 @@ function getMaxNestLevel() {
 function dom() {
   try {
     return {
-      final_dom_node_count: (0, _number.number)(document.querySelectorAll('*').length),
-      final_dom_nest_depth: (0, _number.number)(getMaxNestLevel()),
-      final_html_size: (0, _number.number)(document.querySelector('html').outerHTML.length)
+      final_dom_node_count: (0, _index.number)(document.querySelectorAll('*').length),
+      final_dom_nest_depth: (0, _index.number)(getMaxNestLevel()),
+      final_html_size: (0, _index.number)(document.querySelector('html').outerHTML.length)
     };
   } catch (error) {
     return {
@@ -623,21 +619,20 @@ function dom() {
     };
   }
 }
-},{"../number":"yLhy"}],"bl8m":[function(require,module,exports) {
+},{"../number/index.js":"yLhy"}],"bl8m":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.elapsed = void 0;
-
-var elapsed = function elapsed() {
-  return {
-    page_time_elapsed: window.performance.now()
-  };
-};
-
 exports.elapsed = elapsed;
+
+function elapsed() {
+  var page_time_elapsed = window.performance.now();
+  return Number.isFinite(page_time_elapsed) ? {
+    page_time_elapsed: page_time_elapsed
+  } : {};
+}
 },{}],"I8z3":[function(require,module,exports) {
 "use strict";
 
@@ -663,23 +658,19 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.memory = memory;
 
-var _number = require("../number");
+var _index = require("../number/index.js");
 
-var _snakeCase = require("../snake-case");
+var _index2 = require("../snake-case/index.js");
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
 
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
 
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
 
-function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
 
 /**
  * @type {string[]}
@@ -698,10 +689,10 @@ function memory() {
   }
 
   return Object.assign.apply(Object, _toConsumableArray(METRICS.map(function (metric) {
-    return _defineProperty({}, (0, _snakeCase.snakeCase)(metric), (0, _number.number)(memory[metric]));
+    return _defineProperty({}, (0, _index2.snakeCase)(metric), (0, _index.number)(memory[metric]));
   })));
 }
-},{"../number":"yLhy","../snake-case":"I8z3"}],"iTLC":[function(require,module,exports) {
+},{"../number/index.js":"yLhy","../snake-case/index.js":"I8z3"}],"iTLC":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -709,23 +700,19 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.navigation = navigation;
 
-var _number = require("../number");
+var _index = require("../number/index.js");
 
-var _snakeCase = require("../snake-case");
+var _index2 = require("../snake-case/index.js");
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
 
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
 
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
 
-function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
 
 /**
  * @type {string[]}
@@ -752,7 +739,7 @@ function navigation() {
       return METRICS.filter(function (metric) {
         return !Number.isNaN(entry[metric]);
       }).map(function (metric) {
-        return _defineProperty({}, (0, _snakeCase.snakeCase)(metric), (0, _number.number)(entry[metric]));
+        return _defineProperty({}, (0, _index2.snakeCase)(metric), (0, _index.number)(entry[metric]));
       });
     }))))));
   } // Fall back to obsolete PerformanceTiming interface
@@ -772,11 +759,11 @@ function navigation() {
 
   return METRICS.reduce(function (accumulator, metric) {
     var value = timing[metric] - start;
-    accumulator[(0, _snakeCase.snakeCase)(metric)] = value < 0 ? undefined : (0, _number.number)(value);
+    accumulator[(0, _index2.snakeCase)(metric)] = value < 0 ? undefined : (0, _index.number)(value);
     return accumulator;
   }, {});
 }
-},{"../number":"yLhy","../snake-case":"I8z3"}],"Vd3j":[function(require,module,exports) {
+},{"../number/index.js":"yLhy","../snake-case/index.js":"I8z3"}],"Vd3j":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -784,23 +771,19 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.paint = paint;
 
-var _number = require("../number");
+var _index = require("../number/index.js");
 
-var _snakeCase = require("../snake-case");
+var _index2 = require("../snake-case/index.js");
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
 
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
 
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
 
-function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
 
 /**
  * Retrieve all paint entries
@@ -819,10 +802,10 @@ function paint() {
   return Object.assign.apply(Object, [{}].concat(_toConsumableArray((_ref = []).concat.apply(_ref, _toConsumableArray(performance.getEntriesByType('paint').map(function (_ref2) {
     var name = _ref2.name,
         startTime = _ref2.startTime;
-    return _defineProperty({}, (0, _snakeCase.snakeCase)(name), (0, _number.number)(startTime));
+    return _defineProperty({}, (0, _index2.snakeCase)(name), (0, _index.number)(startTime));
   }))))));
 }
-},{"../number":"yLhy","../snake-case":"I8z3"}],"iXFF":[function(require,module,exports) {
+},{"../number/index.js":"yLhy","../snake-case/index.js":"I8z3"}],"iXFF":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -830,31 +813,31 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.all = void 0;
 
-var _navigation = require("../navigation");
+var _index = require("../navigation/index.js");
 
-var _paint = require("../paint");
+var _index2 = require("../paint/index.js");
 
-var _assets = require("../assets");
+var _index3 = require("../assets/index.js");
 
-var _connection = require("../connection");
+var _index4 = require("../connection/index.js");
 
-var _memory = require("../memory");
+var _index5 = require("../memory/index.js");
 
-var _display = require("../display");
+var _index6 = require("../display/index.js");
 
-var _dom = require("../dom");
+var _index7 = require("../dom/index.js");
 
-var _elapsed = require("../elapsed");
+var _index8 = require("../elapsed/index.js");
 
 /**
  * @returns {object}
  */
 var all = function all() {
-  return Object.assign({}, (0, _navigation.navigation)(), (0, _paint.paint)(), (0, _assets.assets)(), (0, _connection.connection)(), (0, _memory.memory)(), (0, _display.display)(), (0, _dom.dom)(), (0, _elapsed.elapsed)());
+  return Object.assign({}, (0, _index.navigation)(), (0, _index2.paint)(), (0, _index3.assets)(), (0, _index4.connection)(), (0, _index5.memory)(), (0, _index6.display)(), (0, _index7.dom)(), (0, _index8.elapsed)());
 };
 
 exports.all = all;
-},{"../navigation":"iTLC","../paint":"Vd3j","../assets":"noNX","../connection":"PKRT","../memory":"sAwE","../display":"PWnK","../dom":"aHI8","../elapsed":"bl8m"}],"eJ9r":[function(require,module,exports) {
+},{"../navigation/index.js":"iTLC","../paint/index.js":"Vd3j","../assets/index.js":"noNX","../connection/index.js":"PKRT","../memory/index.js":"sAwE","../display/index.js":"PWnK","../dom/index.js":"aHI8","../elapsed/index.js":"bl8m"}],"eJ9r":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -903,15 +886,11 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.measure = measure;
 
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
 
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
 
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
@@ -930,7 +909,9 @@ function measure(_x, _x2) {
 }
 
 function _measure() {
-  _measure = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(fn, name) {
+  _measure = _asyncToGenerator(
+  /*#__PURE__*/
+  regeneratorRuntime.mark(function _callee(fn, name) {
     var _window, performance, unique, _map, _map2, start, end, result;
 
     return regeneratorRuntime.wrap(function _callee$(_context) {
@@ -972,92 +953,92 @@ Object.defineProperty(exports, "__esModule", {
 Object.defineProperty(exports, "assets", {
   enumerable: true,
   get: function () {
-    return _assets.assets;
+    return _index.assets;
   }
 });
 Object.defineProperty(exports, "connection", {
   enumerable: true,
   get: function () {
-    return _connection.connection;
+    return _index2.connection;
   }
 });
 Object.defineProperty(exports, "display", {
   enumerable: true,
   get: function () {
-    return _display.display;
+    return _index3.display;
   }
 });
 Object.defineProperty(exports, "dom", {
   enumerable: true,
   get: function () {
-    return _dom.dom;
+    return _index4.dom;
   }
 });
 Object.defineProperty(exports, "elapsed", {
   enumerable: true,
   get: function () {
-    return _elapsed.elapsed;
+    return _index5.elapsed;
   }
 });
 Object.defineProperty(exports, "memory", {
   enumerable: true,
   get: function () {
-    return _memory.memory;
+    return _index6.memory;
   }
 });
 Object.defineProperty(exports, "navigation", {
   enumerable: true,
   get: function () {
-    return _navigation.navigation;
+    return _index7.navigation;
   }
 });
 Object.defineProperty(exports, "paint", {
   enumerable: true,
   get: function () {
-    return _paint.paint;
+    return _index8.paint;
   }
 });
 Object.defineProperty(exports, "all", {
   enumerable: true,
   get: function () {
-    return _all.all;
+    return _index9.all;
   }
 });
 Object.defineProperty(exports, "fps", {
   enumerable: true,
   get: function () {
-    return _fps.fps;
+    return _index10.fps;
   }
 });
 Object.defineProperty(exports, "measure", {
   enumerable: true,
   get: function () {
-    return _measure.measure;
+    return _index11.measure;
   }
 });
 
-var _assets = require("./assets");
+var _index = require("./assets/index.js");
 
-var _connection = require("./connection");
+var _index2 = require("./connection/index.js");
 
-var _display = require("./display");
+var _index3 = require("./display/index.js");
 
-var _dom = require("./dom");
+var _index4 = require("./dom/index.js");
 
-var _elapsed = require("./elapsed");
+var _index5 = require("./elapsed/index.js");
 
-var _memory = require("./memory");
+var _index6 = require("./memory/index.js");
 
-var _navigation = require("./navigation");
+var _index7 = require("./navigation/index.js");
 
-var _paint = require("./paint");
+var _index8 = require("./paint/index.js");
 
-var _all = require("./all");
+var _index9 = require("./all/index.js");
 
-var _fps = require("./fps");
+var _index10 = require("./fps/index.js");
 
-var _measure = require("./measure");
-},{"./assets":"noNX","./connection":"PKRT","./display":"PWnK","./dom":"aHI8","./elapsed":"bl8m","./memory":"sAwE","./navigation":"iTLC","./paint":"Vd3j","./all":"iXFF","./fps":"eJ9r","./measure":"XxLS"}],"mpVp":[function(require,module,exports) {
+var _index11 = require("./measure/index.js");
+},{"./assets/index.js":"noNX","./connection/index.js":"PKRT","./display/index.js":"PWnK","./dom/index.js":"aHI8","./elapsed/index.js":"bl8m","./memory/index.js":"sAwE","./navigation/index.js":"iTLC","./paint/index.js":"Vd3j","./all/index.js":"iXFF","./fps/index.js":"eJ9r","./measure/index.js":"XxLS"}],"mpVp":[function(require,module,exports) {
 "use strict";
 
 var _webVitals = require("web-vitals");
@@ -1073,4 +1054,4 @@ Object.assign(window, {
   getCLS: _webVitals.getCLS
 });
 },{"web-vitals":"Qvvn","../src/index.js":"uBxZ"}]},{},["mpVp"], null)
-//# sourceMappingURL=script.2800f4b6.js.map
+//# sourceMappingURL=script.b6d75034.js.map
