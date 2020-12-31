@@ -8,6 +8,7 @@ export const fps = ({ sample = 1 } = {}) => new Promise(
         const { requestAnimationFrame } = window;
         if (!requestAnimationFrame) {
             resolve(undefined);
+            return;
         }
 
         const start = window.performance.now();
