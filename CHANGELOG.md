@@ -1,3 +1,10 @@
+# 3.0.1
+
+## Fixes
+
+### Null check for requestAnimationFrame
+Escape execution for "fps" after requestAnimationFrame null check has failed
+
 # 3.0.0
 
 ## Breaking changes
