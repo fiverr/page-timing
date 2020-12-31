@@ -50,12 +50,18 @@ html
       tr
         td Loading...
     script.
-      // Delay everything by 2 seconds
-      const end = Date.now() + 2000;
+      // Delay everything by .5 seconds
+      const end = Date.now() + 500;
       while(Date.now() < end) {/*...*/}
     script(src="script.js")
-    script(async="async").
-      // Delay everything by 2 seconds
-      const end = Date.now() + 2000;
+    script(async="defer").
+      // Delay everything by .5 seconds
+      const end = Date.now() + 500;
       while(Date.now() < end) {/*...*/}
+
+      // After DOMInteractive
+      window.addEventListener('DOMContentLoaded', () => {
+        const wake = Date.now() + 500;
+        while (Date.now() < wake);
+      }, { once: true });
     script(src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r118/three.min.js")
