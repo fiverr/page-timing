@@ -45,6 +45,7 @@ import { navigation, paint } from 'page-timing';
 | navigation_start | Termination of previous document upon navigating | **navigation** | _number_
 | unload_event_start | Previous document unload | **navigation** | _number_
 | unload_event_end | | **navigation** | _number_
+| redirect_count | Numbers of redirects while requesting this page | **navigation** | _number_
 | redirect_start | Redirect from previous document | **navigation** | _number_
 | redirect_end | | **navigation** | _number_
 | fetch_start | Ready to fetch the document | **navigation** | _number_
@@ -62,8 +63,8 @@ import { navigation, paint } from 'page-timing';
 | dom_content_loaded_event_start | Executed required scripts after parsing the document | **navigation** | _number_
 | dom_content_loaded_event_end | | **navigation** | _number_
 | dom_complete | Changed document readyState to "complete" | **navigation** | _number_
-| load_event_start | Document fires "load" event | **navigation** | _number_
-| load_event_end | | **navigation** | _number_
+| load_event_start | All assets are loaded. Document fires "load" event | **navigation** | _number_
+| load_event_end | Document finished executing "load" event listeners | **navigation** | _number_
 | transfer_size | Size (octets) of response headers and payload body | **navigation** | _number_
 | encoded_body_size | Size (octets) of _payload_ body | **navigation** | _number_
 | decoded_body_size | Size (octets) of _message_ body | **navigation** | _number_
@@ -176,7 +177,7 @@ import TTI from 'tti-polyfill';
     [
         [getLCP, 'largest_contentful_paint'],
         [getFID, 'first_input_delay'],
-        [getCLS, 'comulative_layout_shift'],
+        [getCLS, 'cumulative_layout_shift'],
     ].forEach(
         ([ fn, name ]) => fn(
             ({ value }) => send({

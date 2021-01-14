@@ -1,6 +1,6 @@
 {
   "name": "page-timing",
-  "version": "3.0.1",
+  "version": "3.1.0",
   "description": "⏱ Collect and measure browser performance metrics",
   "keywords": [
     "browser",
@@ -30,18 +30,18 @@
     "prebuild": "which parcel || npm i parcel-bundler --no-save",
     "start": "parcel play/index.pug",
     "build": "parcel build play/index.pug --public-url . --no-minify",
-    "test": "NODE_ENV=test node --max_old_space_size=2048 ./node_modules/karma/bin/karma start .karma/index.js --loglevel debug",
+    "test": "NODE_ENV=test node --max_old_space_size=2048 ./node_modules/karma/bin/karma start .karma/index.js --log-level info",
     "lint": "eslint ."
   },
   "devDependencies": {
-    "@fiverr/eslint-config-fiverr": "^3.2.1",
+    "@fiverr/eslint-config-fiverr": "^3.2.4",
     "@lets/sleep": "^1.0.0",
     "@lets/wait": "^2.0.2",
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
-    "eslint": "^7.14.0",
-    "eslint-plugin-log": "^1.2.6",
-    "karma": "^5.2.3",
+    "eslint": "^7.17.0",
+    "eslint-plugin-log": "^1.2.7",
+    "karma": "^6.0.0",
     "karma-chrome-launcher": "^3.1.0",
     "karma-mocha": "^2.0.1",
     "karma-mocha-reporter": "^2.2.5",
@@ -49,7 +49,7 @@
     "mocha": "^8.2.1",
     "regenerator-runtime": "^0.13.7",
     "tti-polyfill": "^0.2.2",
-    "web-vitals": "^1.0.1",
-    "webpack": "^5.9.0"
+    "web-vitals": "^1.1.0",
+    "webpack": "^5.14.0"
   }
 }

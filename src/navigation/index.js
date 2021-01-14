@@ -22,6 +22,7 @@ const METRICS = [
     'loadEventEnd',
     'loadEventStart',
     'navigationStart',
+    'redirectCount',
     'redirectEnd',
     'redirectStart',
     'requestStart',
@@ -44,8 +45,6 @@ export async function navigation() {
     }
 
     const [ navigation ] = await getEntries('navigation');
-
-    // console.log(entries.toJSON());
 
     if (navigation) {
         return Object.assign(
