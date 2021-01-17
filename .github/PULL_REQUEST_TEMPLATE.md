@@ -5,7 +5,7 @@
 - [ ] Breaking change
 - [ ] Deprecations
 - [ ] Tests added
-- [ ] JSDoc added
+- [ ] Doc added
 
 Address issues: comma-separated list of issues addressed by the pull request, where applicable
 
