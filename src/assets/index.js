@@ -1,6 +1,6 @@
 import { getEntries } from '../getEntries/index.js';
 import { getType } from '../get-type/index.js';
-import { number } from '../number/index.js';
+import { number, isNaN } from '../number/index.js';
 
 const FINAL_ASSET_PREFIX = 'final_asset';
 
@@ -23,7 +23,7 @@ export async function assets() {
     }
 
     for (const key in metrics) {
-        if (Number.isNaN(metrics[key])) {
+        if (isNaN(metrics[key])) {
             metrics[key] = undefined;
         }
     }

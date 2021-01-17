@@ -32,3 +32,8 @@ export function number(input) {
 
     return value;
 }
+
+export {
+    isNaN,
+    isFinite
+};

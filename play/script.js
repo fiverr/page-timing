@@ -36,7 +36,7 @@ window.addEventListener(
 
         TTI.getFirstConsistentlyInteractive().then((result) => {
             console.log('tti', performance.now());
-            window.performance_information.time_to_interactive = result;
+            window.performance_information.time_to_interactive = result || undefined;
             print();
         }).catch(console.error);
 

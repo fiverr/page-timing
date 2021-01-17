@@ -1,5 +1,5 @@
 import { getEntries } from '../getEntries/index.js';
-import { number } from '../number/index.js';
+import { number, isNaN } from '../number/index.js';
 import { snakeCase } from '../snake-case/index.js';
 
 /**
@@ -49,7 +49,7 @@ export async function navigation() {
     if (navigation) {
         return Object.assign(
             ...METRICS.filter(
-                (metric) => !Number.isNaN(navigation[metric])
+                (metric) => !isNaN(navigation[metric])
             ).map(
                 (metric) => ({ [snakeCase(metric)]: number(navigation[metric]) })
             )
