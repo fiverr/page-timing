@@ -1,6 +1,6 @@
 {
   "name": "page-timing",
-  "version": "3.1.0",
+  "version": "3.1.1",
   "description": "⏱ Collect and measure browser performance metrics",
   "keywords": [
     "browser",
@@ -39,7 +39,7 @@
     "@lets/wait": "^2.0.2",
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
-    "eslint": "^7.17.0",
+    "eslint": "^7.18.0",
     "eslint-plugin-log": "^1.2.7",
     "karma": "^6.0.0",
     "karma-chrome-launcher": "^3.1.0",
@@ -50,6 +50,6 @@
     "regenerator-runtime": "^0.13.7",
     "tti-polyfill": "^0.2.2",
     "web-vitals": "^1.1.0",
-    "webpack": "^5.14.0"
+    "webpack": "^5.15.0"
   }
 }

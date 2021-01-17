@@ -10,9 +10,11 @@ export const getEntries = (...entryTypes) => new Promise(
             return;
         }
 
-        const entries = entryTypes.map(
-            (entryType) => window.performance.getEntriesByType(entryType)
-        ).flat();
+        const entries = [].concat(
+            ...entryTypes.map(
+                (entryType) => window.performance.getEntriesByType(entryType)
+            )
+        );
 
         if (entries.length) {
             resolve(entries);
