@@ -2,25 +2,29 @@ import { getEntriesByTypeMock } from '../../spec-helpers/index.js';
 import { assets } from './index.js';
 
 const { getEntriesByType } = window.performance;
+const PREFIX = 'final_asset';
+const types = [ 'images', 'javascript', 'stylesheets', 'other' ];
+const metrics = [ 'count', 'load', 'size', 'hitrate' ];
+let data;
 
 describe('assets', () => {
-    before(() => {
+    before(async() => {
         window.performance.getEntriesByType = getEntriesByTypeMock;
+        data = await assets();
+        console.log(data);
     });
     after(() => {
         window.performance.getEntriesByType = getEntriesByType;
     });
 
-    [
-        'final_asset_other_count', 'final_asset_other_load', 'final_asset_other_size',
-        'final_asset_stylesheets_count', 'final_asset_stylesheets_load', 'final_asset_stylesheets_size',
-        'final_asset_javascript_count', 'final_asset_javascript_load', 'final_asset_javascript_size',
-        'final_asset_images_count', 'final_asset_images_load', 'final_asset_images_size'
-    ].forEach(
+    types.map(
+        (type) => metrics.map(
+            (metric) => [ PREFIX, type, metric ].join('_')
+        )
+    ).flat().forEach(
         (event) => it(
             event,
             async() => {
-                const data = await assets();
                 expect(data).to.have.property(event);
                 expect(data[event]).to.be.a('number');
             }

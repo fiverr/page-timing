@@ -75,15 +75,19 @@ import { navigation, paint } from 'page-timing';
 | final_asset_javascript_count | Total **number** of Javascript resources | **assets** | _number_
 | final_asset_javascript_load | Loading **time spent** on Javascript resources | **assets** | _number_
 | final_asset_javascript_size | Total **size** of Javascript resources | **assets** | _number_
+| final_asset_javascript_hitrate | Browser cache hit rate (0-1) for Javascript resources | **assets** | _number_
 | final_asset_stylesheets_count | Total **number** of CSS resources | **assets** | _number_
 | final_asset_stylesheets_load | Loading **time spent** on CSS resources | **assets** | _number_
 | final_asset_stylesheets_size | Total **size** of CSS resources | **assets** | _number_
+| final_asset_stylesheets_hitrate | Browser cache hit rate (0-1) for CSS resources | **assets** | _number_
 | final_asset_images_count | Total **number** of image resources | **assets** | _number_
 | final_asset_images_load | Loading **time spent** on image resources | **assets** | _number_
 | final_asset_images_size | Total **size** of image resources | **assets** | _number_
+| final_asset_images_hitrate | Browser cache hit rate (0-1) for image resources | **assets** | _number_
 | final_asset_other_count | Total **number** of other resources | **assets** | _number_
 | final_asset_other_load | Loading **time spent** on other resources | **assets** | _number_
 | final_asset_other_size | Total **size** of other resources | **assets** | _number_
+| final_asset_other_hitrate | Browser cache hit rate (0-1) for other resources | **assets** | _number_
 | connection_type | bluetooth, cellular, ethernet, none, wifi, wimax, other, unknown | **connection** | _string_
 | effective_bandwidth | Mbps | **connection** | _number_
 | effective_connection_type | slow-2g, 2g, 3g, 4g | **connection** | _string_
