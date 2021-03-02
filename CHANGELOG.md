@@ -1,24 +1,3 @@
-# 3.2.0
-
-## New features
-
-### Add assets browser cache hitrate
-Add `final_asset_javascript_hitrate`, `final_asset_javascript_hitrate`, `final_asset_images_hitrate`, `final_asset_other_hitrate`. Measure 0 - 1
-
-# 3.1.1
-
-## Fixes
-
-### Add some backwards compatibility for older browsers
-Remove use of Array.flat, and supply a fallback for Number.isNaN and Number.isFinite
-
-# 3.1.0
-
-## New features
-
-### Add redirect_count to navigation metrics
-Add `redirect_count` to navigation metrics: Numbers of redirects while requesting this page.
-
 # 3.0.1
 
 ## Fixes

@@ -13,7 +13,6 @@ export async function assets() {
     }
 
     const metrics = {};
-    const caches = {};
     const entries = await getEntries('resource');
 
     for (const entry of entries) {
@@ -21,11 +20,6 @@ export async function assets() {
         add(metrics, type, 'count', 1);
         add(metrics, type, 'load', entry.duration);
         add(metrics, type, 'size', entry.decodedBodySize);
-        cache(caches, type, entry.duration);
-    }
-
-    for (const type in caches) {
-        add(metrics, type, 'hitrate', caches[type].hit / caches[type].total);
     }
 
     for (const key in metrics) {
@@ -50,20 +44,4 @@ function add(accumulator, type, key, value) {
 
     accumulator[field] = accumulator[field] || 0;
     accumulator[field] += number(value) || 0;
-}
-
-/**
- * Mutating
- * @param {object} accumulator
- * @param {string} type
- * @param {number} duration (0 for cache hit and more for cache miss)
- * @returns {void}
- */
-function cache(accumulator, type, duration) {
-    accumulator[type] = accumulator[type] || {};
-    accumulator[type].total = accumulator[type].total || 0;
-    accumulator[type].hit = accumulator[type].hit || 0;
-
-    accumulator[type].total++;
-    accumulator[type].hit += +!duration;
 }
