@@ -111,6 +111,35 @@ import { navigation, paint } from 'page-timing';
 </a>
 
 ## More functions
+### `cachehit`
+Get resource browser cache cachehit (0 - 1 number)
+```js
+import { cachehit } from 'page-timing';
+
+const rate = await cachehit(); // 0.855
+```
+
+Pass in a filter function to get results for a subset of resources:
+```js
+// Javascript files only
+const javascriptCacheHitRate = await cachehit({
+    filter: ({ name }) => /.m?js[$\?]/.test(name),
+    limit: 50
+});
+
+// Specific domain
+const myCDNCacheHitRate = await cachehit({
+    filter: ({ name }) => /https:\/\/[\w-]*.mycdn.com/.test(),
+    limit: 50
+});
+```
+
+#### Arguments
+- **filter**: A filter function to create a subset of files we want to get cache rate for. This function accepts one argument: a [PerformanceResourceTiming](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceResourceTiming) object. The default is no filter (all resources).
+- **limit**: A number, in milliseconds, which represents resource load duration that we consider served from cache. The default is 50.
+
+> † There are two types of browser cache: memory cache and disk cache. Memory cache will have a duration of 0 (limit: 0) and disk cache will have higher duration, while still relatively low. For this reason the default limit value is 50 (milliseconds). This gives a close estimation of browser cache hit-rate.
+
 ### `fps`
 Measure page frame rate at a certain point in time
 ```js
