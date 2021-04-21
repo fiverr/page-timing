@@ -3,9 +3,7 @@ const browsers = ['Chrome'];
 const watch = process.env.npm_config_watch;
 const ENV_SETUP = resolve(`${__dirname}/env-setup.js`);
 const browserNoActivityTimeout = 1 * 60 * 1000;
-const pattern = ((args) =>
-    `../src/${args.length ? `**/+(${args.join('|')})` : '**'}/spec.js`
-)(JSON.parse(process.env.npm_config_argv).remain);
+const pattern = '../src/**/spec.js';
 
 module.exports = (config) => {
     const {LOG_INFO} = config;

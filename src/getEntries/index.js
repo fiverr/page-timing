@@ -10,6 +10,11 @@ export const getEntries = (...entryTypes) => new Promise(
             return;
         }
 
+        if (!entryTypes.length) {
+            reject(new TypeError('A Performance Observer must have a non-empty entryTypes attribute'));
+            return;
+        }
+
         const entries = [].concat(
             ...entryTypes.map(
                 (entryType) => window.performance.getEntriesByType(entryType)

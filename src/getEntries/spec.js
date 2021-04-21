@@ -1,15 +1,26 @@
 import { getEntries } from './index.js';
 
-const { PerformanceObserver } = window;
+const { performance } = window;
 
 describe('getEntries', () => {
     afterEach(() => {
-        window.PerformanceObserver = PerformanceObserver;
+        Object.assign(
+            window,
+            { performance }
+        );
     });
-    it('should return an empty object when PerformanceObserver is not supported', async() => {
-        delete window.PerformanceObserver;
-        return expect(getEntries()).to.be.rejectedWith('PerformanceObserver is not supported');
+    it('should return an empty object when performance API is not supported', async() => {
+        delete window.performance;
+        return expect(getEntries('navigation')).to.be.rejectedWith('Performance API is not supported');
     });
+    it(
+        'should return an empty object when no entryTypes were passed through',
+        async() => expect(
+            getEntries()
+        ).to.be.rejectedWith(
+            'A Performance Observer must have a non-empty entryTypes attribute'
+        )
+    );
     it('should return matching entries list by type', async() => {
         const records = await getEntries('resource');
         expect(records).to.have.lengthOf.at.least(5);
