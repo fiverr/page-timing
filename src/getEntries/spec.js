@@ -1,13 +1,12 @@
 import { getEntries } from './index.js';
 
 const { performance } = window;
+const { observe, disconnect } = window.PerformanceObserver.prototype;
 
 describe('getEntries', () => {
     afterEach(() => {
-        Object.assign(
-            window,
-            { performance }
-        );
+        Object.assign(window, { performance });
+        Object.assign(window.PerformanceObserver.prototype, { observe, disconnect });
     });
     it('should return an empty object when performance API is not supported', async() => {
         delete window.performance;
@@ -45,5 +44,26 @@ describe('getEntries', () => {
         expect(types).to.include('resource');
         expect(types).not.to.include('paint');
         expect(types).not.to.include('first-input');
+    });
+    it('should reject for unsupported types', async() => {
+        const error = new TypeError("Failed to execute 'observe' on 'PerformanceObserver': A Performance Observer MUST have at least one valid entryType in its entryTypes attribute.");
+
+        window.PerformanceObserver.prototype.observe = () => { throw error; };
+
+        return expect(getEntries('something-else')).to.be.rejectedWith(error);
+    });
+    it('should disconnected the observer when failed to observe', async() => {
+        const error = new TypeError("Failed to execute 'observe' on 'PerformanceObserver': A Performance Observer MUST have at least one valid entryType in its entryTypes attribute.");
+        let disconnected = false;
+
+        window.PerformanceObserver.prototype.observe = () => { throw error; };
+        window.PerformanceObserver.prototype.disconnect = () => { disconnected = true; };
+        try {
+            await getEntries('something-else');
+        } catch (error) {
+            // ignore
+        }
+
+        expect(disconnected).to.be.true;
     });
 });
