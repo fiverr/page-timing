@@ -1,3 +1,9 @@
+# 3.1.4
+
+## Fixes
+
+### Return an empty object when 'paint' entries are not supported
+
 # 3.1.3
 
 ## Fixes

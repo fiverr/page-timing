@@ -13,14 +13,18 @@ export async function paint() {
         return {};
     }
 
-    const entries = await getEntries('paint');
+    try {
+        const entries = await getEntries('paint');
 
-    return Object.assign(
-        {},
-        ...[].concat(
-            ...entries.map(
-                ({ name, startTime }) => ({ [snakeCase(name)]: number(startTime) })
+        return Object.assign(
+            {},
+            ...[].concat(
+                ...entries.map(
+                    ({ name, startTime }) => ({ [snakeCase(name)]: number(startTime) })
+                )
             )
-        )
-    );
+        );
+    } catch (error) {
+        return {};
+    }
 }
