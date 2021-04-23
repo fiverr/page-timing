@@ -1,3 +1,21 @@
+# 3.1.3
+
+## Fixes
+
+### Fix failure to execute 'observe' on 'PerformanceObserver' and entryType in not accepted by browser.
+
+# 3.1.1
+
+## Fixes
+
+### Add some backwards compatibility for older browsers
+
+# 3.1.0
+
+## Feature
+
+### Add redirect_count to navigation metrics
+
 # 3.0.1
 
 ## Fixes
