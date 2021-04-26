@@ -1,3 +1,9 @@
+# 3.1.5
+
+## Fixes
+
+### Prevent breakage in older browsers that do not support 'navigation' entry type
+
 # 3.1.4
 
 ## Fixes

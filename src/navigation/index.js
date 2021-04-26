@@ -44,37 +44,42 @@ export async function navigation() {
         return {};
     }
 
-    const [ navigation ] = await getEntries('navigation');
+    try {
 
-    if (navigation) {
-        return Object.assign(
-            ...METRICS.filter(
-                (metric) => !isNaN(navigation[metric])
-            ).map(
-                (metric) => ({ [snakeCase(metric)]: number(navigation[metric]) })
-            )
+        const [ navigation ] = await getEntries('navigation');
+
+        if (navigation) {
+            return Object.assign(
+                ...METRICS.filter(
+                    (metric) => !isNaN(navigation[metric])
+                ).map(
+                    (metric) => ({ [snakeCase(metric)]: number(navigation[metric]) })
+                )
+            );
+        }
+
+        // Fall back to obsolete PerformanceTiming interface
+        const { timing } = performance;
+        if (!timing) { return {}; }
+
+        const start = performance.timeOrigin || timing.navigationStart;
+        if (!start) { return {}; }
+
+        const result = METRICS.reduce(
+            (accumulator, metric) => {
+                const value = timing[metric] - start;
+                accumulator[snakeCase(metric)] = value < 0
+                    ? undefined
+                    : number(value)
+                ;
+
+                return accumulator;
+            },
+            {}
         );
+
+        return result;
+    } catch (error) {
+        return {};
     }
-
-    // Fall back to obsolete PerformanceTiming interface
-    const { timing } = performance;
-    if (!timing) { return {}; }
-
-    const start = performance.timeOrigin || timing.navigationStart;
-    if (!start) { return {}; }
-
-    const result = METRICS.reduce(
-        (accumulator, metric) => {
-            const value = timing[metric] - start;
-            accumulator[snakeCase(metric)] = value < 0
-                ? undefined
-                : number(value)
-            ;
-
-            return accumulator;
-        },
-        {}
-    );
-
-    return result;
 }
